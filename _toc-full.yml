@@ -1,0 +1,33 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: inleiding
+- file: overzicht
+- file: bijeenkomst-1
+- file: bijeenkomst-2
+- file: bijeenkomst-3
+- file: iot-met-microbit
+- file: gateway
+- file: iotbit-gateway
+- file: microbit-iotnode
+- file: microbit-radio
+- file: espat-library
+- file: espat-gateway
+- file: espat-test
+- file: espat-node
+- file: ulpp-test
+- file: json
+- file: umqtt
+- file: nodered
+- file: microbit-logger
+- file: microbit-micropython
+- file: iot-ontwerpen
+- file: benodigd
+- file: making
+- file: concepten
+- file: glossary
+
+
