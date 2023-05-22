@@ -6,7 +6,21 @@ root: intro
 chapters:
 - file: inleiding
 - file: overzicht
+- file: bijeenkomst-1
 - file: benodigd
+- file: lpp-payload
+- file: python-editor
+- file: microbit-software
+  sections:
+  - file: microbit-iotnode
+  - file: microbit-logger
+  - file: lpp-software
+  - file: espat-library
+  - file: espat-gateway
+  - file: json
+- file: presentaties
+  sections:
+  - file: presentatie-1
 
 
 

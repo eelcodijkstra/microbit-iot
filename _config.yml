@@ -32,6 +32,10 @@ html:
   use_repository_button: true
   
 sphinx:
+  extra_extensions:
+    - sphinx_exercise
+    - sphinx.ext.graphviz
+    - sphinx_assessment
   config:
     language: nl
 
