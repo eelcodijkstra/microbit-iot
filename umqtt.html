@@ -1,0 +1,984 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="nl" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>umqtt (simple) &#8212; IoT met de microbit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/assessment.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/assessment.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'umqtt';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Zoeken" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="nl"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+    <p class="title logo__title">IoT met de micro:bit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="inleiding.html">Inleiding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benodigd.html">Wat heb je nodig?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overzicht.html">Overzicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-1.html">Bijeenkomst 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-2.html">Bijeenkomst 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-3.html">Bijeenkomst 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lpp-payload.html">LPP payload formaat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-editor.html">Python op de microbit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbits-programmeren.html">Programmeren van de micro:bits</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="microbit-software.html">micro:bit software</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="microbit-iotnode.html">microbit IoT-knoop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="microbit-logger.html">radio-logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="espat-gateway.html">ESP-AT gateway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="espat-module.html">ESP-AT module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lpp-module.html">LPP implementatie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json-module.html">JSON voor de microbit</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="presentaties.html">Presentaties</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-1.html">Presentatie-1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-2.html">Presentatie 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-3.html">Presentatie 3</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download deze pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/umqtt.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download het bronbestand"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Afdrukken naar pdf"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Volledig scherm"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Zoeken" aria-label="Zoeken" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>umqtt (simple)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="umqtt-simple">
+<h1>umqtt (simple)<a class="headerlink" href="#umqtt-simple" title="Permalink naar deze titel">#</a></h1>
+<p>Bestand:</p>
+<p>(NB: er is ook een ingebouwde versie in microPython, maar die is kennelijk niet goed genoeg? Er zijn ook wat achterstallige patches die nog niet verwerkt zijn.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">usocket</span> <span class="k">as</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">uselect</span>
+<span class="kn">from</span> <span class="nn">utime</span> <span class="kn">import</span> <span class="n">ticks_add</span><span class="p">,</span> <span class="n">ticks_ms</span><span class="p">,</span> <span class="n">ticks_diff</span>
+
+
+<span class="k">class</span> <span class="nc">MQTTException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span> <span class="nf">pid_gen</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">pid</span> <span class="o">=</span> <span class="n">pid</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">pid</span> <span class="o">&lt;</span> <span class="mi">65535</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="k">yield</span> <span class="n">pid</span>
+
+
+<span class="k">class</span> <span class="nc">MQTTClient</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client_id</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keepalive</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">ssl</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ssl_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">socket_timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">message_timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default constructor, initializes MQTTClient object.</span>
+
+<span class="sd">        :param client_id:  Unique MQTT ID attached to client.</span>
+<span class="sd">        :type client_id: str</span>
+<span class="sd">        :param server: MQTT host address.</span>
+<span class="sd">        :type server str</span>
+<span class="sd">        :param port: MQTT Port, typically 1883. If unset, the port number will default to 1883 of 8883 base on ssl.</span>
+<span class="sd">        :type port: int</span>
+<span class="sd">        :param user: Username if your server requires it.</span>
+<span class="sd">        :type user: str</span>
+<span class="sd">        :param password: Password if your server requires it.</span>
+<span class="sd">        :type password: str</span>
+<span class="sd">        :param keepalive: The Keep Alive is a time interval measured in seconds since the last</span>
+<span class="sd">                          correct control packet was received.</span>
+<span class="sd">        :type keepalive: int</span>
+<span class="sd">        :param ssl: Require SSL for the connection.</span>
+<span class="sd">        :type ssl: bool</span>
+<span class="sd">        :param ssl_params: Required SSL parameters. Kwargs from function ssl.wrap_socket.</span>
+<span class="sd">                           See documentation: https://docs.micropython.org/en/latest/library/ssl.html#ssl.ssl.wrap_socket</span>
+<span class="sd">                           For esp8266, please refer to the capabilities of the axTLS library applied to the micropython port.</span>
+<span class="sd">                           https://axtls.sourceforge.net</span>
+<span class="sd">        :type ssl_params: dict</span>
+<span class="sd">        :param socket_timeout: The time in seconds after which the socket interrupts the connection to the server when</span>
+<span class="sd">                               no data exchange takes place. None - socket blocking, positive number - seconds to wait.</span>
+<span class="sd">        :type socket_timeout: int</span>
+<span class="sd">        :param message_timeout: The time in seconds after which the library recognizes that a message with QoS=1</span>
+<span class="sd">                                or topic subscription has not been received by the server.</span>
+<span class="sd">        :type message_timeout: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">port</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">port</span> <span class="o">=</span> <span class="mi">8883</span> <span class="k">if</span> <span class="n">ssl</span> <span class="k">else</span> <span class="mi">1883</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client_id</span> <span class="o">=</span> <span class="n">client_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poller_r</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poller_w</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ssl</span> <span class="o">=</span> <span class="n">ssl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ssl_params</span> <span class="o">=</span> <span class="n">ssl_params</span> <span class="k">if</span> <span class="n">ssl_params</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">newpid</span> <span class="o">=</span> <span class="n">pid_gen</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;cb&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cb</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;cbstat&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cbstat</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pswd</span> <span class="o">=</span> <span class="n">password</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keepalive</span> <span class="o">=</span> <span class="n">keepalive</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw_topic</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw_msg</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw_qos</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw_retain</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rcv_pids</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># PUBACK and SUBACK pids awaiting ACK response</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_ping</span> <span class="o">=</span> <span class="n">ticks_ms</span><span class="p">()</span>  <span class="c1"># Time of the last PING sent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_cpacket</span> <span class="o">=</span> <span class="n">ticks_ms</span><span class="p">()</span>  <span class="c1"># Time of last Control Packet</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket_timeout</span> <span class="o">=</span> <span class="n">socket_timeout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message_timeout</span> <span class="o">=</span> <span class="n">message_timeout</span>
+
+    <span class="k">def</span> <span class="nf">_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private class method.</span>
+
+<span class="sd">        :param n: Expected length of read bytes</span>
+<span class="sd">        :type n: int</span>
+<span class="sd">        :return:</span>
+
+<span class="sd">        Notes:</span>
+<span class="sd">        Current usocket implementation returns None on .read from</span>
+<span class="sd">        non-blocking socket with no data. However, OSError</span>
+<span class="sd">        EAGAIN is checked for in case this ever changes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">rbytes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">11</span><span class="p">:</span>     <span class="c1"># EAGAIN / EWOULDBLOCK</span>
+                    <span class="n">rbytes</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rbytes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_sock_timeout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poller_r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket_timeout</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">rbytes</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Connection closed by host (?)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="n">rbytes</span>
+        <span class="k">return</span> <span class="n">msg</span>
+
+    <span class="k">def</span> <span class="nf">_write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bytes_wr</span><span class="p">,</span> <span class="n">length</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private class method.</span>
+
+<span class="sd">        :param bytes_wr: Bytes sequence for writing</span>
+<span class="sd">        :type bytes_wr: bytes</span>
+<span class="sd">        :param length: Expected length of write bytes</span>
+<span class="sd">        :type length: int</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># In non-blocking socket mode, the entire block of data may not be sent.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sock_timeout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poller_w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket_timeout</span><span class="p">)</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">bytes_wr</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">out</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bytes_wr</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">out</span> <span class="o">!=</span> <span class="n">length</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">def</span> <span class="nf">_send_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private class method.</span>
+<span class="sd">        :param s:</span>
+<span class="sd">        :type s: byte</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">65536</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;big&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_recv_len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private class method.</span>
+<span class="sd">        :return:</span>
+<span class="sd">        :rtype int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">sh</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">n</span> <span class="o">|=</span> <span class="p">(</span><span class="n">b</span> <span class="o">&amp;</span> <span class="mh">0x7f</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">sh</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="mh">0x80</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">n</span>
+            <span class="n">sh</span> <span class="o">+=</span> <span class="mi">7</span>
+
+    <span class="k">def</span> <span class="nf">_varlen_encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">268435456</span>  <span class="c1"># 2**28, i.e. max. four 7-bit bytes</span>
+        <span class="k">while</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mh">0x7f</span><span class="p">:</span>
+            <span class="n">buf</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span> <span class="o">&amp;</span> <span class="mh">0x7f</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0x80</span>
+            <span class="n">value</span> <span class="o">&gt;&gt;=</span> <span class="mi">7</span>
+            <span class="n">offset</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">buf</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">_sock_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poller</span><span class="p">,</span> <span class="n">socket_timeout</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">poller</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">socket_timeout</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">socket_timeout</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
+            <span class="c1"># https://github.com/micropython/micropython/issues/3747#issuecomment-385650294</span>
+            <span class="c1"># Sockets on esp8266 don&#39;t return POLLHUP or POLLERR at all.</span>
+            <span class="c1"># If a connection is broken then the socket will become readable and a read on it will return b&#39;&#39;.</span>
+            <span class="c1"># POLLIN(value:1) - you have something to read</span>
+            <span class="c1"># POLLHUP(value:16) - your input is ended</span>
+            <span class="c1"># POLLIN(1) &amp; POLLHUP(16) = 17 - that meanss that your input is ended and that your have still</span>
+            <span class="c1">#                                something to read from the buffer</span>
+            <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">fd</span><span class="p">,</span> <span class="n">flag</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">flag</span> <span class="o">&amp;</span> <span class="n">uselect</span><span class="o">.</span><span class="n">POLLIN</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">flag</span> <span class="o">&amp;</span> <span class="n">uselect</span><span class="o">.</span><span class="n">POLLHUP</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">2</span> <span class="k">if</span> <span class="n">poller</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">poller_r</span> <span class="k">else</span> <span class="mi">3</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">flag</span> <span class="o">&amp;</span> <span class="n">uselect</span><span class="o">.</span><span class="n">POLLERR</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">28</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set callback for received subscription messages.</span>
+
+<span class="sd">        :param f: callable(topic, msg, retained, duplicate)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cb</span> <span class="o">=</span> <span class="n">f</span>
+
+    <span class="k">def</span> <span class="nf">set_callback_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the callback for information about whether the sent packet (QoS=1)</span>
+<span class="sd">        or subscription was received or not by the server.</span>
+
+<span class="sd">        :param f: callable(pid, status)</span>
+
+<span class="sd">        Where:</span>
+<span class="sd">            status = 0 - timeout</span>
+<span class="sd">            status = 1 - successfully delivered</span>
+<span class="sd">            status = 2 - Unknown PID. It is also possible that the PID is outdated,</span>
+<span class="sd">                         i.e. it came out of the message timeout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cbstat</span> <span class="o">=</span> <span class="n">f</span>
+
+    <span class="k">def</span> <span class="nf">set_last_will</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the last will and testament of the client. This is used to perform an action by the broker</span>
+<span class="sd">        in the event that the client &quot;dies&quot;.</span>
+<span class="sd">        Learn more at https://www.hivemq.com/blog/mqtt-essentials-part-9-last-will-and-testament/</span>
+
+<span class="sd">        :param topic: Topic of LWT. Takes the from &quot;path/to/topic&quot;</span>
+<span class="sd">        :type topic: byte</span>
+<span class="sd">        :param msg: Message to be published to LWT topic.</span>
+<span class="sd">        :type msg: byte</span>
+<span class="sd">        :param retain: Have the MQTT broker retain the message.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        :param qos: Sets quality of service level. Accepts values 0 to 2. PLEASE NOTE qos=2 is not actually supported.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">qos</span> <span class="o">&lt;=</span> <span class="mi">2</span>
+        <span class="k">assert</span> <span class="n">topic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw_topic</span> <span class="o">=</span> <span class="n">topic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw_msg</span> <span class="o">=</span> <span class="n">msg</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw_qos</span> <span class="o">=</span> <span class="n">qos</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw_retain</span> <span class="o">=</span> <span class="n">retain</span>
+
+    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clean_session</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establishes connection with the MQTT server.</span>
+
+<span class="sd">        :param clean_session: Starts new session on true, resumes past session if false.</span>
+<span class="sd">        :type clean_session: bool</span>
+<span class="sd">        :return: Existing persistent session of the client from previous interactions.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+
+        <span class="n">ai</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sock_raw</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">ai</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ai</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ai</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sock_raw</span><span class="o">.</span><span class="n">setblocking</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sock_raw</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ai</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">uerrno</span>
+            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">uerrno</span><span class="o">.</span><span class="n">EINPROGRESS</span><span class="p">:</span>
+                <span class="k">raise</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ssl</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">ussl</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sock_raw</span><span class="o">.</span><span class="n">setblocking</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="n">ussl</span><span class="o">.</span><span class="n">wrap_socket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock_raw</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">ssl_params</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sock_raw</span><span class="o">.</span><span class="n">setblocking</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock_raw</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">poller_r</span> <span class="o">=</span> <span class="n">uselect</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poller_r</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">,</span> <span class="n">uselect</span><span class="o">.</span><span class="n">POLLERR</span> <span class="o">|</span> <span class="n">uselect</span><span class="o">.</span><span class="n">POLLIN</span> <span class="o">|</span> <span class="n">uselect</span><span class="o">.</span><span class="n">POLLHUP</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poller_w</span> <span class="o">=</span> <span class="n">uselect</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poller_w</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">,</span> <span class="n">uselect</span><span class="o">.</span><span class="n">POLLOUT</span><span class="p">)</span>
+
+        <span class="c1"># Byte nr - desc</span>
+        <span class="c1"># 1 - \x10 0001 - Connect Command, 0000 - Reserved</span>
+        <span class="c1"># 2 - Remaining Length</span>
+        <span class="c1"># PROTOCOL NAME (3.1.2.1 Protocol Name)</span>
+        <span class="c1"># 3,4 - protocol name length len(&#39;MQTT&#39;)</span>
+        <span class="c1"># 5-8 = &#39;MQTT&#39;</span>
+        <span class="c1"># PROTOCOL LEVEL (3.1.2.2 Protocol Level)</span>
+        <span class="c1"># 9 - mqtt version 0x04</span>
+        <span class="c1"># CONNECT FLAGS</span>
+        <span class="c1"># 10 - connection flags</span>
+        <span class="c1">#  X... .... = User Name Flag</span>
+        <span class="c1">#  .X.. .... = Password Flag</span>
+        <span class="c1">#  ..X. .... = Will Retain</span>
+        <span class="c1">#  ...X X... = QoS Level</span>
+        <span class="c1">#  .... .X.. = Will Flag</span>
+        <span class="c1">#  .... ..X. = Clean Session Flag</span>
+        <span class="c1">#  .... ...0 = (Reserved) It must be 0!</span>
+        <span class="c1"># KEEP ALIVE</span>
+        <span class="c1"># 11,12 - keepalive</span>
+        <span class="c1"># 13,14 - client ID length</span>
+        <span class="c1"># 15-15+len(client_id) - byte(client_id)</span>
+        <span class="n">premsg</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x10\0\0\0\0\0</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\0\x04</span><span class="s2">MQTT</span><span class="se">\x04\0\0\0</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">sz</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client_id</span><span class="p">)</span>
+
+        <span class="n">msg</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">clean_session</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span>
+        <span class="c1"># Clean session = True, remove current session</span>
+        <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">clean_session</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rcv_pids</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sz</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+            <span class="n">msg</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">|=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span>  <span class="c1"># User Name Flag</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pswd</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">sz</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pswd</span><span class="p">)</span>
+                <span class="n">msg</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">|=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span>  <span class="c1"># # Password Flag</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keepalive</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">keepalive</span> <span class="o">&lt;</span> <span class="mi">65536</span>
+            <span class="n">msg</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">|=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keepalive</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span>
+            <span class="n">msg</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">|=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keepalive</span> <span class="o">&amp;</span> <span class="mh">0x00FF</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lw_topic</span><span class="p">:</span>
+            <span class="n">sz</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lw_topic</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lw_msg</span><span class="p">)</span>
+            <span class="n">msg</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">|=</span> <span class="mh">0x4</span> <span class="o">|</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lw_qos</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span> <span class="o">|</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lw_qos</span> <span class="o">&amp;</span> <span class="mh">0x2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span>
+            <span class="n">msg</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">|=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lw_retain</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span>
+
+        <span class="n">plen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_varlen_encode</span><span class="p">(</span><span class="n">sz</span><span class="p">,</span> <span class="n">premsg</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">premsg</span><span class="p">,</span> <span class="n">plen</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_send_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lw_topic</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_send_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lw_topic</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_send_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lw_msg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_send_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pswd</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_send_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pswd</span><span class="p">)</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x20</span> <span class="ow">and</span> <span class="n">resp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x02</span><span class="p">):</span>  <span class="c1"># control packet type, Remaining Length == 2</span>
+            <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">29</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">resp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">resp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">20</span> <span class="o">+</span> <span class="n">resp</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">resp</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_cpacket</span> <span class="o">=</span> <span class="n">ticks_ms</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">resp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mi">1</span>  <span class="c1"># Is existing persistent session of the client from previous interactions.</span>
+
+    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disconnects from the MQTT server.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xe0\0</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="n">MQTTException</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">poller_r</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">poller_r</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">poller_w</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">poller_w</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poller_r</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poller_w</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pings the MQTT server.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xc0\0</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_ping</span> <span class="o">=</span> <span class="n">ticks_ms</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">retain</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dup</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Publishes a message to a specified topic.</span>
+
+<span class="sd">        :param topic: Topic you wish to publish to. Takes the form &quot;path/to/topic&quot;</span>
+<span class="sd">        :type topic: byte</span>
+<span class="sd">        :param msg: Message to publish to topic.</span>
+<span class="sd">        :type msg: byte</span>
+<span class="sd">        :param retain: Have the MQTT broker retain the message.</span>
+<span class="sd">        :type retain: bool</span>
+<span class="sd">        :param qos: Sets quality of service level. Accepts values 0 to 2. PLEASE NOTE qos=2 is not actually supported.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :param dup: Duplicate delivery of a PUBLISH Control Packet</span>
+<span class="sd">        :type dup: bool</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">qos</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">pkt</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x30\0\0\0\0</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pkt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">|=</span> <span class="n">qos</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">|</span> <span class="n">retain</span> <span class="o">|</span> <span class="nb">int</span><span class="p">(</span><span class="n">dup</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span>
+        <span class="n">sz</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">qos</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sz</span> <span class="o">+=</span> <span class="mi">2</span>
+        <span class="n">plen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_varlen_encode</span><span class="p">(</span><span class="n">sz</span><span class="p">,</span> <span class="n">pkt</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">pkt</span><span class="p">,</span> <span class="n">plen</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_send_str</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">qos</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">pid</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">newpid</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">pid</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;big&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">qos</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rcv_pids</span><span class="p">[</span><span class="n">pid</span><span class="p">]</span> <span class="o">=</span> <span class="n">ticks_add</span><span class="p">(</span><span class="n">ticks_ms</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">message_timeout</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">pid</span>
+
+    <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Subscribes to a given topic.</span>
+
+<span class="sd">        :param topic: Topic you wish to publish to. Takes the form &quot;path/to/topic&quot;</span>
+<span class="sd">        :type topic: byte</span>
+<span class="sd">        :param qos: Sets quality of service level. Accepts values 0 to 1. This gives the maximum QoS level at which</span>
+<span class="sd">                    the Server can send Application Messages to the Client.</span>
+<span class="sd">        :type qos: int</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">qos</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">cb</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Subscribe callback is not set&quot;</span>
+        <span class="n">pkt</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x82\0\0\0\0\0\0</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pid</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">newpid</span><span class="p">)</span>
+        <span class="n">sz</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">plen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_varlen_encode</span><span class="p">(</span><span class="n">sz</span><span class="p">,</span> <span class="n">pkt</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">pkt</span><span class="p">[</span><span class="n">plen</span><span class="p">:</span><span class="n">plen</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pid</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">pkt</span><span class="p">,</span> <span class="n">plen</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_send_str</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">qos</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;little&quot;</span><span class="p">))</span>  <span class="c1"># maximum QOS value that can be given by the server to the client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rcv_pids</span><span class="p">[</span><span class="n">pid</span><span class="p">]</span> <span class="o">=</span> <span class="n">ticks_add</span><span class="p">(</span><span class="n">ticks_ms</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">message_timeout</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pid</span>
+
+    <span class="k">def</span> <span class="nf">_message_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">curr_tick</span> <span class="o">=</span> <span class="n">ticks_ms</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">pid</span><span class="p">,</span> <span class="n">timeout</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcv_pids</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">ticks_diff</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="n">curr_tick</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rcv_pids</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cbstat</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether a pending message from server is available.</span>
+
+<span class="sd">        If socket_timeout=None, this is the socket lock mode. That is, it waits until the data can be read.</span>
+
+<span class="sd">        Otherwise it will return None, after the time set in the socket_timeout.</span>
+
+<span class="sd">        It processes such messages:</span>
+<span class="sd">        - response to PING</span>
+<span class="sd">        - messages from subscribed topics that are processed by functions set by the set_callback method.</span>
+<span class="sd">        - reply from the server that he received a QoS=1 message or subscribed to a topic</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">res</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="c1"># wait forever if no timeout, else wait 1 msec</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">poller_r</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket_timeout</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">1</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_message_timeout</span><span class="p">()</span>
+                        <span class="k">return</span> <span class="kc">None</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">res</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_message_timeout</span><span class="p">()</span>
+                        <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c1"># 110: ETIMEDOUT 11: EAGAIN/EWOULDBLOCK</span>
+                <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">110</span> <span class="ow">or</span> <span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">11</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_message_timeout</span><span class="p">()</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">e</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">28</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Connection closed by host</span>
+
+        <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xd0</span><span class="s2">&quot;</span><span class="p">:</span>  <span class="c1"># PINGRESP</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">MQTTException</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_cpacket</span> <span class="o">=</span> <span class="n">ticks_ms</span><span class="p">()</span>
+            <span class="k">return</span>
+
+        <span class="n">op</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mh">0x40</span><span class="p">:</span>  <span class="c1"># PUBACK</span>
+            <span class="n">sz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sz</span> <span class="o">!=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x02</span><span class="s2">&quot;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">rcv_pid</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rcv_pid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcv_pids</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_cpacket</span> <span class="o">=</span> <span class="n">ticks_ms</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rcv_pids</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">rcv_pid</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cbstat</span><span class="p">(</span><span class="n">rcv_pid</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cbstat</span><span class="p">(</span><span class="n">rcv_pid</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mh">0x90</span><span class="p">:</span>  <span class="c1"># SUBACK Packet fixed header</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+            <span class="c1"># Byte - desc</span>
+            <span class="c1"># 1 - Remaining Length 2(varible header) + len(payload)=1</span>
+            <span class="c1"># 2,3 - PID</span>
+            <span class="c1"># 4 - Payload</span>
+            <span class="k">if</span> <span class="n">resp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mh">0x03</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">resp</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">resp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x80</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">44</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">resp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">resp</span><span class="p">)</span>
+            <span class="n">pid</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">|</span> <span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">pid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcv_pids</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_cpacket</span> <span class="o">=</span> <span class="n">ticks_ms</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rcv_pids</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cbstat</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_message_timeout</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">op</span> <span class="o">&amp;</span> <span class="mh">0xf0</span> <span class="o">!=</span> <span class="mh">0x30</span><span class="p">:</span>  <span class="c1"># 3.3 PUBLISH – Publish message</span>
+            <span class="k">return</span> <span class="n">op</span>
+        <span class="n">sz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recv_len</span><span class="p">()</span>
+        <span class="n">topic_len</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+        <span class="n">topic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="n">topic_len</span><span class="p">)</span>
+        <span class="n">sz</span> <span class="o">-=</span> <span class="n">topic_len</span> <span class="o">+</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">op</span> <span class="o">&amp;</span> <span class="mi">6</span><span class="p">:</span>  <span class="c1"># QoS level &gt; 0</span>
+            <span class="n">pid</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+            <span class="n">sz</span> <span class="o">-=</span> <span class="mi">2</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span> <span class="k">if</span> <span class="n">sz</span> <span class="k">else</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+        <span class="n">retained</span> <span class="o">=</span> <span class="n">op</span> <span class="o">&amp;</span> <span class="mh">0x01</span>
+        <span class="n">dup</span> <span class="o">=</span> <span class="n">op</span> <span class="o">&amp;</span> <span class="mh">0x08</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cb</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">retained</span><span class="p">),</span> <span class="nb">bool</span><span class="p">(</span><span class="n">dup</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_cpacket</span> <span class="o">=</span> <span class="n">ticks_ms</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">op</span> <span class="o">&amp;</span> <span class="mi">6</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># QoS==1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x40\x02</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Send PUBACK</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write</span><span class="p">(</span><span class="n">pid</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;big&#39;</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">op</span> <span class="o">&amp;</span> <span class="mi">6</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># QoS==2</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">op</span> <span class="o">&amp;</span> <span class="mi">6</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>  <span class="c1"># 3.3.1.2 QoS - Reserved – must not be used</span>
+            <span class="k">raise</span> <span class="n">MQTTException</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">wait_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method waits for a message from the server.</span>
+
+<span class="sd">        Compatibility with previous versions.</span>
+
+<span class="sd">        It is recommended not to use this method. Set socket_time=None instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">st_old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">socket_timeout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket_timeout</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_msg</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">socket_timeout</span> <span class="o">=</span> <span class="n">st_old</span>
+        <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Door Eelco Dijkstra
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

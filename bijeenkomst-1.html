@@ -1,0 +1,552 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="nl" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Bijeenkomst 1 &#8212; IoT met de microbit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/assessment.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/assessment.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'bijeenkomst-1';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Zoeken" href="search.html" />
+    <link rel="next" title="Bijeenkomst 2" href="bijeenkomst-2.html" />
+    <link rel="prev" title="Overzicht" href="overzicht.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="nl"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+    <p class="title logo__title">IoT met de micro:bit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="inleiding.html">Inleiding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benodigd.html">Wat heb je nodig?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overzicht.html">Overzicht</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bijeenkomst 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-2.html">Bijeenkomst 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-3.html">Bijeenkomst 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lpp-payload.html">LPP payload formaat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-editor.html">Python op de microbit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbits-programmeren.html">Programmeren van de micro:bits</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="microbit-software.html">micro:bit software</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="microbit-iotnode.html">microbit IoT-knoop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="microbit-logger.html">radio-logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="espat-gateway.html">ESP-AT gateway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="espat-module.html">ESP-AT module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lpp-module.html">LPP implementatie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json-module.html">JSON voor de microbit</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="presentaties.html">Presentaties</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-1.html">Presentatie-1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-2.html">Presentatie 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-3.html">Presentatie 3</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download deze pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/bijeenkomst-1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download het bronbestand"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Afdrukken naar pdf"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Volledig scherm"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Zoeken" aria-label="Zoeken" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bijeenkomst 1</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhoud </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#praktische-opdrachten">Praktische opdrachten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#microbit-radio">microbit radio</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mqtt">MQTT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nodered">NodeRed</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bijeenkomst-1">
+<h1>Bijeenkomst 1<a class="headerlink" href="#bijeenkomst-1" title="Permalink naar deze titel">#</a></h1>
+<p>Het IoT (internet of things) is een volgende stap in de ontwikkeling van het internet, na het web. Het web vormt de (grafische) gebruikersinterface voor het internet, en de verbinding van het internet naar mensen. Het IoT verbindt <em>fysieke dingen</em> en omgevingen met het internet, en maakt het mogelijk deze automatisch te monitoren (bewaken) en te besturen. In het bijzonder zorgt het IoT voor de verbinding van het internet naar machines.
+Dit maakt het mogelijk dat machines via het internet met machines communiceren, maar ook mensen met machines.</p>
+<ul class="simple">
+<li><p>lesmateriaal: <a class="reference external" href="https://eelcodijkstra.github.io/netbook0/h1/inleiding.html">https://eelcodijkstra.github.io/netbook0/h1/inleiding.html</a></p></li>
+</ul>
+<section id="praktische-opdrachten">
+<h2>Praktische opdrachten<a class="headerlink" href="#praktische-opdrachten" title="Permalink naar deze titel">#</a></h2>
+<section id="microbit-radio">
+<h3>microbit radio<a class="headerlink" href="#microbit-radio" title="Permalink naar deze titel">#</a></h3>
+<p><strong>Stap 1</strong>: installeer de code voor de IoT-node op microbit 1, zie <a class="reference internal" href="microbit-iotnode.html#iot-node-code"><span class="std std-ref">IoT-node code</span></a></p>
+<ul class="simple">
+<li><p>installeer met behulp van de online Python editor de code van de IoT-knoop op een microbit</p>
+<ul>
+<li><p>kopieer de code van <a class="reference internal" href="microbit-iotnode.html#iot-node-code"><span class="std std-ref">IoT-node code</span></a> over de bestaande code heen</p></li>
+<li><p>als alternatief kun je een desktop editor als Mu gebruiken</p></li>
+<li><p>deze versie gebruikt alleen de ingebouwde sensoren en actuatoren; maar je kunt eventueel een LED aansluiten op pin0, deze werkt parallel aan het display.</p></li>
+</ul>
+</li>
+<li><p>test deze software: bij het verzenden krijg je de bytes van het verzonden bericht te zien (via de “serial” host-USB verbinding).</p></li>
+</ul>
+<p><strong>Stap 2</strong>: installeer de code voor de radio-logger op microbit 2, zie <a class="reference internal" href="microbit-logger.html#radio-logger-code"><span class="std std-ref">radio-logger code</span></a>. Deze code gebruikt een extra module die je als project-bestand aan de editor moet opgeven.</p>
+<ul class="simple">
+<li><p>installeer de microbit logger-software op een andere microbit</p>
+<ul>
+<li><p>links in het project-menu: “create file”; noem deze <code class="docutils literal notranslate"><span class="pre">lppjson</span></code>; kopieer de <a class="reference internal" href="lpp-module.html#lppjson-module-code"><span class="std std-ref">lppjson module code</span></a> naar het middelste venster (over de bestaande code heen).</p></li>
+<li><p>selecteer links in het project-menu: <code class="docutils literal notranslate"><span class="pre">main.py</span></code>, en kopieer de <a class="reference internal" href="microbit-logger.html#radio-logger-code"><span class="std std-ref">radio-logger code</span></a> naar het middelste venster.</p></li>
+</ul>
+</li>
+<li><p>de berichten van de IoT-knoop(en) kun je nu volgen via de logger (=”packet snifffer”)</p>
+<ul>
+<li><p>de berichten worden getoond als bytes en als JSON-string.</p></li>
+<li><p>controleer voor een bericht of je de bytes-begrijpt in samenhang met de bijbehorende JSON-string. Gebruik daarvoor de uitleg van het LPP payload formaat.</p></li>
+</ul>
+</li>
+</ul>
+<p>Merk op dat de berichten niet versleuteld worden: iedereen <em>in het netwerk</em> kan meeluisteren (net als in een WiFi-netwerk, waar de versleuteling voor het netwerk geldt, niet per bericht).</p>
+<div class="exercise admonition" id="bijeenkomst-1-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1 </span> (Voeg een <em>presence</em> sensor toe)</p>
+<section id="exercise-content">
+<p>Voor onze voorbeeld-toepassing hebben we een <em>presence</em> sensor nodig.
+Een primitieve versie daarvan is het schudden van de micro:bit (“shake” event).
+Als je de mogelijkheden daarvoor hebt, kun je een PIR-sensor gebruiken.</p>
+<ul class="simple">
+<li><p>breid de functie <code class="docutils literal notranslate"><span class="pre">send_sensors</span></code> uit met een extra parameter voor <em>presence</em></p>
+<ul>
+<li><p>gebruik hiervoor channel</p></li>
+</ul>
+</li>
+<li><p>voeg aan de <em>event-loop</em> een IF-statement toe voor het detecteren een <em>presence</em> event</p>
+<ul>
+<li><p>stuur direct de sensor-waarden op, inclusief de waarde voor <em>presence</em></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</div>
+</section>
+<section id="mqtt">
+<h3>MQTT<a class="headerlink" href="#mqtt" title="Permalink naar deze titel">#</a></h3>
+<p>Uitleg over MQTT: <a class="reference external" href="https://eelcodijkstra.github.io/netbook0/mqtt/toctree.html">https://eelcodijkstra.github.io/netbook0/mqtt/toctree.html</a></p>
+<p>Opdrachten uit het bestaande materiaal: <a class="reference external" href="https://eelcodijkstra.github.io/netbook0/mqtt/mqtt-opdrachten.html">https://eelcodijkstra.github.io/netbook0/mqtt/mqtt-opdrachten.html</a></p>
+<ul class="simple">
+<li><p>Chat: <a class="reference external" href="https://eelcodijkstra.github.io/netbook0/mqtt/mqtt-opdrachten.html#mqtt-chat">https://eelcodijkstra.github.io/netbook0/mqtt/mqtt-opdrachten.html#mqtt-chat</a></p></li>
+<li><p>Knoop volgen: <a class="reference external" href="https://eelcodijkstra.github.io/netbook0/mqtt/mqtt-opdrachten.html#knoop-volgen">https://eelcodijkstra.github.io/netbook0/mqtt/mqtt-opdrachten.html#knoop-volgen</a></p></li>
+<li><p>Knoop besturen: <a class="reference external" href="https://eelcodijkstra.github.io/netbook0/mqtt/mqtt-opdrachten.html#knoop-besturen">https://eelcodijkstra.github.io/netbook0/mqtt/mqtt-opdrachten.html#knoop-besturen</a></p></li>
+</ul>
+<p>Bij de laatste opdrachten kun je gebruik maken van bestaande IoT-knopen, maar ook van een gesimuleerde knoop in je browser. Hiervoor gebruik je het programma: <a class="reference external" href="http://infvopedia.nl/iotnode-app.html">http://infvopedia.nl/iotnode-app.html</a>. Zorg ervoor dat je een eigen <em>uniek</em> node-ID invult (4 hexadecimale cijfers).</p>
+</section>
+<section id="nodered">
+<h3>NodeRed<a class="headerlink" href="#nodered" title="Permalink naar deze titel">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://eelcodijkstra.github.io/netbook0/protocollen/nodered/nodered-opdrachten.html">https://eelcodijkstra.github.io/netbook0/protocollen/nodered/nodered-opdrachten.html</a></p></li>
+<li><p>voor de opdrachten kun je gebruik maken van een NodeRed project op: <a class="reference external" href="https://forge.infvoflows.nl/">https://forge.infvoflows.nl/</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="overzicht.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">vorige</p>
+        <p class="prev-next-title">Overzicht</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="bijeenkomst-2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">volgende</p>
+        <p class="prev-next-title">Bijeenkomst 2</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhoud
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#praktische-opdrachten">Praktische opdrachten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#microbit-radio">microbit radio</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mqtt">MQTT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nodered">NodeRed</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Door Eelco Dijkstra
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

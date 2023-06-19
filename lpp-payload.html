@@ -1,0 +1,559 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="nl" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>LPP payload formaat &#8212; IoT met de microbit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/assessment.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/assessment.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lpp-payload';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Zoeken" href="search.html" />
+    <link rel="next" title="Python op de microbit" href="python-editor.html" />
+    <link rel="prev" title="Bijeenkomst 3" href="bijeenkomst-3.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="nl"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+    <p class="title logo__title">IoT met de micro:bit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="inleiding.html">Inleiding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benodigd.html">Wat heb je nodig?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overzicht.html">Overzicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-1.html">Bijeenkomst 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-2.html">Bijeenkomst 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-3.html">Bijeenkomst 3</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">LPP payload formaat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-editor.html">Python op de microbit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbits-programmeren.html">Programmeren van de micro:bits</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="microbit-software.html">micro:bit software</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="microbit-iotnode.html">microbit IoT-knoop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="microbit-logger.html">radio-logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="espat-gateway.html">ESP-AT gateway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="espat-module.html">ESP-AT module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lpp-module.html">LPP implementatie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json-module.html">JSON voor de microbit</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="presentaties.html">Presentaties</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-1.html">Presentatie-1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-2.html">Presentatie 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-3.html">Presentatie 3</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download deze pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/lpp-payload.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download het bronbestand"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Afdrukken naar pdf"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Volledig scherm"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Zoeken" aria-label="Zoeken" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>LPP payload formaat</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lpp-payload-formaat">
+<h1>LPP payload formaat<a class="headerlink" href="#lpp-payload-formaat" title="Permalink naar deze titel">#</a></h1>
+<p>Voor het micro:bit IoT-netwerk gebruiken we het binaire Cayenne Low Power Payload formaat.
+Dit formaat wordt ook in LoRaWan netwerken gebruikt; zie bijvoorbeeld: <a class="reference external" href="https://docs.mydevices.com/docs/lorawan/cayenne-lpp">https://docs.mydevices.com/docs/lorawan/cayenne-lpp</a>.</p>
+<p>Daarnaast gebruiken we een vertaling van dit formaat naar het JSON-strings, om deze berichten via MQTT te verzenden.</p>
+<div class="admonition-standaard-voor-onze-iot-toepassingen admonition">
+<p class="admonition-title">Standaard voor onze IoT-toepassingen</p>
+<p>Voor de verschillende soorten IoT-knopen (WiFi, RF69, LoRaWan, micro:bit) gebruiken we niet alleen hetzelfde LPP-formaat, maar ook zoveel mogelijk dezelfde indeling van de kanalen voor de verschillende sensoren. De bijdehorende NodeRed flows zijn dan niet afhankelijk van de gebruikte IoT-knoop.</p>
+</div>
+<p>Een pakket in het micro:bit IoT-netwerk begint met een <strong>5-byte header</strong>, gevolgd door de <strong>payload in LPP formaat</strong>.</p>
+<p><strong>Header:</strong></p>
+<ul class="simple">
+<li><p>1 byte: protocol-ID (0x0A voor uplink-pakketten, van IoT-knoop naar gateway; 0x0B voor downlink-pakketten)</p></li>
+<li><p>2 byte: node-ID (adres van afzender bij uplink cq. bestemming bij downlink)</p></li>
+<li><p>2 byte: counter</p></li>
+</ul>
+<p>De 2-byte getallen worden gegeven in de volgorde: hi byte, low byte.</p>
+<p>Een pakket bevat maar 1 adres, omdat het andere adres impliciet de gateway is, aangegeven door uplink of downlink. De IoT-nodes kunnen niet onderling communiceren.</p>
+<p><strong>Payload:</strong></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-left head"><p>channel</p></th>
+<th class="text-right head"><p>tag</p></th>
+<th class="text-left head"><p>type</p></th>
+<th class="text-center head"><p>data size</p></th>
+<th class="text-left head"><p>data resolution per bit</p></th>
+<th class="text-left head"><p>opmerking (microbit)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>0</p></td>
+<td class="text-right"><p>1</p></td>
+<td class="text-left"><p>dOut</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>display, led0 (pin0)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>1</p></td>
+<td class="text-right"><p>1</p></td>
+<td class="text-left"><p>dOut</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>led1 (pin1)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>2</p></td>
+<td class="text-right"><p>0</p></td>
+<td class="text-left"><p>dIn</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>button A</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>3</p></td>
+<td class="text-right"><p>0</p></td>
+<td class="text-left"><p>dIn</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>button B</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>4</p></td>
+<td class="text-right"><p>103</p></td>
+<td class="text-left"><p>temperature</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-left"><p>0.1°C Signed MSB</p></td>
+<td class="text-left"><p>microbit temperature</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>5</p></td>
+<td class="text-right"><p>115</p></td>
+<td class="text-left"><p>barometer</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-left"><p>0.1 hPa Unsigned MSB</p></td>
+<td class="text-left"><p>(gereserveerd)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>6</p></td>
+<td class="text-right"><p>104</p></td>
+<td class="text-left"><p>humidity</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-left"><p>0.5 % Unsigned</p></td>
+<td class="text-left"><p>(gereserveerd)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>7</p></td>
+<td class="text-right"><p>102</p></td>
+<td class="text-left"><p>presence</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>shake, PIR sensor</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>8</p></td>
+<td class="text-right"><p>2</p></td>
+<td class="text-left"><p>aIn</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-left"><p>0.01</p></td>
+<td class="text-left"><p>light level (display)</p></td>
+</tr>
+</tbody>
+</table>
+<p>De kanalen 5 en 6 zijn gereserveerd voor <em>barometer</em> en <em>humidity</em>.
+In het geval van de micro:bit heb je daarvoor extra sensoren nodig.</p>
+<blockquote>
+<div><p>Bij andere IoT-knopen zijn <em>barometer</em> en <em>humidity</em> soms standaard aanwezig.</p>
+</div></blockquote>
+<p>Als je andere sensoren of actuatoren toevoegt aan de microbit, dan moet je daarvoor kanalen 9 en hoger gebruiken, met een passende keuze voor het type.</p>
+<p><strong>Voorbeeld van een pakket met header en payload in binair LPP formaat</strong></p>
+<p>We geven dit als een rij bytes in Python-notatie.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Voorbeeld van een pakket in JSON-LPP string-formaat</strong></p>
+<p>Het bovenstaande binaire bericht met header en LPP-payload wordt in JSON:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;nodeid&quot;</span><span class="p">:</span> <span class="s2">&quot;3b52&quot;</span><span class="p">,</span> 
+ <span class="s2">&quot;counter&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+ <span class="s2">&quot;payload&quot;</span><span class="p">:</span> <span class="p">{</span>
+     <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="mi">260</span><span class="p">},</span> 
+     <span class="s2">&quot;8&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;aIn&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">},</span> 
+     <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dOut&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> 
+     <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dOut&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> 
+     <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dIn&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> 
+     <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dIn&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}}}</span>
+</pre></div>
+</div>
+<p>(Merk op dat de volgorde van de kanalen niet beslist gehandhaafd blijft in dit JSON-formaat.)</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="bijeenkomst-3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">vorige</p>
+        <p class="prev-next-title">Bijeenkomst 3</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="python-editor.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">volgende</p>
+        <p class="prev-next-title">Python op de microbit</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Door Eelco Dijkstra
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

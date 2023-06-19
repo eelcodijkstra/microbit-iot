@@ -1,0 +1,595 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="nl" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Wat heb je nodig? &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'benodigde-hardware';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Zoeken" href="search.html" />
+    <link rel="next" title="The making of…" href="making.html" />
+    <link rel="prev" title="Ontwerpen van een IoT-toepassing" href="iot-ontwerpen.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="nl"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Internet of Things met de microbit
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="inleiding.html">Inleiding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overzicht.html">Overzicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-1.html">Bijeenkomst 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-2.html">Bijeenkomst 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-3.html">Bijeenkomst 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iot-met-microbit.html">IoT met de microbit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gateway.html">microPython gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iotbit-gateway.html">iot:bit als gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbit-iotnode.html">microbit IoT-knoop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbit-radio.html">microbit-radio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="espat-library.html">ESP-AT library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="espat-gateway.html">ESPAT-gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="espat-test.html">ESP-AT test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="espat-node.html">ESP-AT IoT-node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ulpp-test.html">Module ulpp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json.html">JSON - voor de microbit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="umqtt.html">umqtt (simple)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nodered.html">NodeRed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbit-logger.html">microbit-logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbit-micropython.html">microPython voor de micro:bit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iot-ontwerpen.html">Ontwerpen van een IoT-toepassing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Wat heb je nodig?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="making.html">The making of…</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepten.html">Concepten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Bronopslagplaats"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fbenodigde-hardware.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open een probleem"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download deze pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/benodigde-hardware.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download het bronbestand"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Afdrukken naar pdf"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Volledig scherm"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Zoeken" aria-label="Zoeken" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Wat heb je nodig?</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhoud </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hardware">Hardware</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#software">Software</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netwerk">Netwerk</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="wat-heb-je-nodig">
+<h1>Wat heb je nodig?<a class="headerlink" href="#wat-heb-je-nodig" title="Permalink naar deze titel">#</a></h1>
+<section id="hardware">
+<span id="benodigde-hardware"></span><h2>Hardware<a class="headerlink" href="#hardware" title="Permalink naar deze titel">#</a></h2>
+<ul class="simple">
+<li><p>microbit-gateway:</p>
+<ul>
+<li><p>microbit(V2)</p></li>
+<li><p>Elecfreaks iot:bit bordje</p>
+<ul>
+<li><p>bijv. <a class="reference external" href="https://webshop.ictleskisten.nl/product/elecfreaks-iotbit-internet-wifi-extension-board-for-microbit-ef03426/">https://webshop.ictleskisten.nl/product/elecfreaks-iotbit-internet-wifi-extension-board-for-microbit-ef03426/</a></p></li>
+</ul>
+</li>
+<li><p>gevoed via USB-voeding</p></li>
+</ul>
+</li>
+<li><p>microbit-IoT-knoop(en):</p>
+<ul>
+<li><p>microbit(bij voorkeur V2, eventueel V1)</p></li>
+<li><p>zo mogelijk aangevuld met sensoren, bijvoorbeeld:</p>
+<ul>
+<li><p>Elecfreaks octopus:bit bordje</p></li>
+<li><p>octopus PIR sensor</p></li>
+<li><p>octopus LED</p></li>
+</ul>
+</li>
+<li><p>gevoed uit batterij of uit USB</p></li>
+</ul>
+</li>
+<li><p>microbit-logger:</p>
+<ul>
+<li><p>microbit (V1 of V2)</p></li>
+<li><p>verbonden met host-computer voor log-data</p></li>
+</ul>
+</li>
+</ul>
+<p>Daarnaast heb je een laptop/desktop-computer nodig met een recente Chrome of Edge browser. Deze moet je via USB met een micro:bit kunnen verbinden.</p>
+<p>In principe kun je een microbit V1 gebruiken als IoT-knoop. Maar voor dit gebruik heeft versie 2 twee belangrijke voordelen: (i) je kunt deze goed in Python programmeren, door het extra geheugen; (ii) je kunt deze in “low power sleep mode” zetten, om batterij-energie te sparen.</p>
+<p><strong>Minimale versie.</strong> Je kunt met 1 micro:bit (V2) met een iot:bit bordje volstaan - maar je mist dan wel een deel van de <em>fun</em>.</p>
+</section>
+<section id="software">
+<span id="benodigde-software"></span><h2>Software<a class="headerlink" href="#software" title="Permalink naar deze titel">#</a></h2>
+<ul class="simple">
+<li><p>recente Chrome of Edge browser (voor WebUSB in Python editor)</p></li>
+<li><p>online Python editor voor de microbit: <a class="reference external" href="https://python.microbit.org/v/3">https://python.microbit.org/v/3</a></p>
+<ul>
+<li><p>alternatief: Python Mu desktop editor (<a class="reference external" href="https://codewith.mu">https://codewith.mu</a>)</p></li>
+</ul>
+</li>
+<li><p>microbit Python programma’s (in dit materiaal)</p></li>
+<li><p>NodeRed; bijvoorbeeld via:</p>
+<ul>
+<li><p>online versie: (via deze cursus, FlowForge)</p></li>
+<li><p>op eigen computer geïnstalleerd</p></li>
+<li><p>op Raspberry Pi, in lokale netwerk</p></li>
+</ul>
+</li>
+<li><p>MQTT hulpprogramma’s</p>
+<ul>
+<li><p>MQTT broker (infvopedia:1883)</p></li>
+<li><p><a class="reference external" href="http://infvopedia.nl/mqt3.html">http://infvopedia.nl/mqt3.html</a></p></li>
+</ul>
+</li>
+<li><p>gesimuleerde IoT-knoop</p>
+<ul>
+<li><p><a class="reference external" href="http://infvopedia.nl/iotnode-app.html">http://infvopedia.nl/iotnode-app.html</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="netwerk">
+<span id="benodigd-netwerk"></span><h2>Netwerk<a class="headerlink" href="#netwerk" title="Permalink naar deze titel">#</a></h2>
+<p>De microbit IoT-gateway op basis van het iot:bit bordje maakt verbinding met het lokale WiFi netwerk; dit moet verbonden zijn met het internet.
+Dit moet een netwerk zijn met een (enkel) netwerk-wachtwoord, zoals bijvoorbeeld een thuisnetwerk.
+Een (school)netwerk met een gebruikersnaam en wachtwoord voor elke gebruiker is niet mogelijk.</p>
+<p>Enkele alternatieven voor een dergelijk schoolnetwerk: (i) een telefoon als tijdelijk WiFI access-point; (ii) een MiFi kastje: dit biedt een lokaal WiFi netwerk verbonden met het mobiele internet. Het mobiele dataverkeer is zeer beperkt, je kunt bijvoorbeeld kiezen voor een verbinding met lage snelheid (“2G”).</p>
+<p>Het lokale netwerk moet toegang tot de MQTT-broker mogelijk maken. (In sommige schoolnetwerken zijn erg veel niet-HTTP protocollen geblokkeerd. Ook dan biedt een MiFI kastje uitkomst.)</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="iot-ontwerpen.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">vorige</p>
+        <p class="prev-next-title">Ontwerpen van een IoT-toepassing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="making.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">volgende</p>
+        <p class="prev-next-title">The making of…</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhoud
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hardware">Hardware</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#software">Software</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#netwerk">Netwerk</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Door The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

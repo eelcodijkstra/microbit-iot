@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="nl" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Overzicht &#8212; IoT met de microbit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/assessment.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/assessment.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'overzicht';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Zoeken" href="search.html" />
+    <link rel="next" title="Bijeenkomst 1" href="bijeenkomst-1.html" />
+    <link rel="prev" title="Wat heb je nodig?" href="benodigd.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="nl"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+    <p class="title logo__title">IoT met de micro:bit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="inleiding.html">Inleiding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benodigd.html">Wat heb je nodig?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overzicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-1.html">Bijeenkomst 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-2.html">Bijeenkomst 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-3.html">Bijeenkomst 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lpp-payload.html">LPP payload formaat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-editor.html">Python op de microbit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbits-programmeren.html">Programmeren van de micro:bits</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="microbit-software.html">micro:bit software</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="microbit-iotnode.html">microbit IoT-knoop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="microbit-logger.html">radio-logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="espat-gateway.html">ESP-AT gateway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="espat-module.html">ESP-AT module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lpp-module.html">LPP implementatie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json-module.html">JSON voor de microbit</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="presentaties.html">Presentaties</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-1.html">Presentatie-1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-2.html">Presentatie 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-3.html">Presentatie 3</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download deze pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/overzicht.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download het bronbestand"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Afdrukken naar pdf"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Volledig scherm"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Zoeken" aria-label="Zoeken" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Overzicht</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhoud </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#internet-of-things-architectuur-communicatie">Internet of Things: architectuur, communicatie</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bijeenkomst-1">Bijeenkomst 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bijeenkomst-2">Bijeenkomst 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bijeenkomst-3">Bijeenkomst 3</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="overzicht">
+<h1>Overzicht<a class="headerlink" href="#overzicht" title="Permalink naar deze titel">#</a></h1>
+<p>Dit is de documentatie bij een online cursus van 3 bijeenkomsten, over “het Internet of Things met de micro:bit”. Deze cursus is gebaseerd op het lesmateriaal van het keuzethema Netwerken (Internet of Things).
+Je kunt dat materiaal gebruiken met verschillende soorten IoT-knopen. In de huidige versie zit de micro:bit daar nog niet bij. Met deze aanvulling kun je het materiaal ook met de micro:bit gebruiken.</p>
+<figure class="align-right" id="id1">
+<a class="reference internal image-reference" href="_images/microbit-v2-front.png"><img alt="_images/microbit-v2-front.png" src="_images/microbit-v2-front.png" style="width: 250px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">micro:bit versie 2</span><a class="headerlink" href="#id1" title="Permallink naar deze afbeelding">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Waarom IoT met de micro:bit?</strong>.</p>
+<ul class="simple">
+<li><p>microbits zijn laagdrempelig in het gebruik, en zijn op veel scholen beschikbaar (in tegenstelling tot de andere voorbeelden in het IoT lesmateriaal).</p></li>
+<li><p>een micro:bit heeft alle componenten van een IoT-knoop: sensoren, actuatoren, microcontroller en radio, en kun je eventueel eenvoudig uitbreiden met extra sensoren en actuatoren.</p></li>
+<li><p>de microbit V2 biedt (eindelijk) goede mogelijkheden voor het programmeren in Python</p></li>
+<li><p>de microbit V2 kun je energie-zuinig gebruiken - voor IoT-knopen met batterijvoeding.</p></li>
+</ul>
+<p><strong>De cursus.</strong> De nadruk van de cursus ligt op een aantal praktische opdrachten waarbij de microbit als IoT-knoop gebruikt wordt, in een lokaal IoT-netwerk met meerdere microbits, verbonden via een (microbit) gateway met het internet. Het gebruik van de microbit vormt een uitbreiding op het bestaande lesmateriaal, met als doel om de praktische opdrachten laagdrempeliger te maken.</p>
+<p><strong>Wat heb je nodig?</strong></p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Hardware</div>
+<p class="sd-card-text">Benodigde hardware</p>
+</div>
+<a class="sd-stretched-link reference internal" href="benodigd.html#benodigde-hardware"><span class="std std-ref"></span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Software</div>
+<p class="sd-card-text">Gebruikte software</p>
+</div>
+<a class="sd-stretched-link reference internal" href="benodigd.html#benodigde-software"><span class="std std-ref"></span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Netwerk</div>
+<p class="sd-card-text">Lokaal WiFi netwerk, verbonden met het internet</p>
+</div>
+<a class="sd-stretched-link reference internal" href="benodigd.html#benodigd-netwerk"><span class="std std-ref"></span></a></div>
+</div>
+</div>
+</div>
+<section id="internet-of-things-architectuur-communicatie">
+<h2>Internet of Things: architectuur, communicatie<a class="headerlink" href="#internet-of-things-architectuur-communicatie" title="Permalink naar deze titel">#</a></h2>
+<p>Het Internet of Things is gericht op <em>slimme toepassingen</em>, waarbij data van lokale sensoren gecombineerd wordt met data en diensten “in the cloud”, voor het nemen van <em>betere beslissingen</em>, bijvoorbeeld voor het aansturen van lokale actuatoren. In het lesmateriaal staan enkele voorbeelden van dergelijke toepassingen.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Microfoons en camera’s stellen hoge eisen aan de communicatie, en vallen buiten het bestek van onze IoT-toepassingen.</p>
+</aside>
+<p>In deze cursus (en in het lesmateriaal) gebruiken we “simpele” sensoren en actuatoren, met lage eisen aan de communicatie: we kunnen werken met lage bandbreedtes (zeer weinig bits/s) en hoge latency (mogelijk enkele seconden). Dit geeft een grote vrijheid voor de fysieke (radio)communicatie.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/iot-functionele-architectuur.drawio.png"><img alt="_images/iot-functionele-architectuur.drawio.png" src="_images/iot-functionele-architectuur.drawio.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">IoT functionele architectuur</span><a class="headerlink" href="#id2" title="Permallink naar deze afbeelding">#</a></p>
+</figcaption>
+</figure>
+<p>Bovenstaand schema geeft de <em>functionele onderdelen</em> van een IoT-toepassing, zonder de communicatie. Omdat deze onderdelen fysiek ver van elkaar verwijderd zijn speelt de communicatie een essentiële rol. In een dergelijk <em>gedistribueerd systeem</em> gebeurt de interactie tussen de onderdelen op basis van <em>berichten</em>. (Dat vraagt om een wat andere manier van programmeren, wat je terug vindt in NodeRed.)</p>
+<p>In deze cursus gebruiken we IoT-nodes op basis van de microbit.</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="_images/iot-netwerk-architectuur.drawio.png"><img alt="_images/iot-netwerk-architectuur.drawio.png" src="_images/iot-netwerk-architectuur.drawio.png" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">IoT netwerk-architectuur</span><a class="headerlink" href="#id3" title="Permallink naar deze afbeelding">#</a></p>
+</figcaption>
+</figure>
+<p>De IoT netwerk-architectuur bevat naast de genoemde functionele onderdelen ook de <em>verbindingen</em> en <em>netwerkapparaten</em>. Vanuit het netwerk bezien zijn de functionele onderdelen <em>eindapparaten</em>.</p>
+<p>De <em>IoT-gateway</em> verbindt het IoT-netwerk met het lokale (WiFi) netwerk. Deze moet dus zowel een microbit-radio bevatten als een WiFi-radio.</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/iot-protocollen.drawio.png"><img alt="_images/iot-protocollen.drawio.png" src="_images/iot-protocollen.drawio.png" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">IoT protocollen</span><a class="headerlink" href="#id4" title="Permallink naar deze afbeelding">#</a></p>
+</figcaption>
+</figure>
+<p>Onze IoT-toepassing gebruikt het MQTT-protocol. MQTT is een publish/subscribe protocol, waarmee een symmetrische interactie tussen de verschillende onderdelen mogelijk is.</p>
+<blockquote>
+<div><p>Web-toepassingen gebruiken HTTP als belangrijkste protocol. Dat is een client-server protocol, waarbij de client een andere rol heeft dan de server (asymmetrische interactie).</p>
+</div></blockquote>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="_images/iot-protocol-stack.drawio.png"><img alt="_images/iot-protocol-stack.drawio.png" src="_images/iot-protocol-stack.drawio.png" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">IoT protocol-stack</span><a class="headerlink" href="#id5" title="Permallink naar deze afbeelding">#</a></p>
+</figcaption>
+</figure>
+<p>Voor de IoT-toepassing gebruiken we een eigen protocol met het LPP-formaat voor de data (payload). In het IoT-netwerk gebruiken we dat in binaire vorm. In het internet transporteren we dat in een JSON-LPP (string) formaat over MQTT.</p>
+<p>Het MQTT-protocol gebruikt de internet-protocollen TCP en IP.</p>
+</section>
+<section id="bijeenkomst-1">
+<h2>Bijeenkomst 1<a class="headerlink" href="#bijeenkomst-1" title="Permalink naar deze titel">#</a></h2>
+<p>In de eerste bijeenkomst geven we eerst een overzicht van een IoT-toepassing: welke onderdelen (hardware en software) spelen daarbij een rol? Hoe ziet de communicatie tussen deze onderdelen eruit?</p>
+<p>Daarna gaan we dieper in op het microbit-IoT-netwerk, met de microbit radio als basis. Hiervoor gebruik je twee microbits: één als IoT-knoop, en één als radiologger; deze laatste is optioneel, maar wel handig. De communicatie in het netwerk gebruikt het binaire Cayenne LPP formaat voor de “payload” met de sensor-data.</p>
+<p>We slaan de IoT-gateway even over: die komt de volgende keer aan de beurt. (Dan heb je nog even tijd om de hardware te bestellen, als je die nog niet hebt.)</p>
+<p>De rest van de communicatie in de IoT-toepassing gebruikt het MQTT-protocol als basis. We behandelen de principes van dit protocol, en de manier waarop we dit in de IoT-toepassing gebruiken. Je kunt dit uitproberen met IoT-knopen op afstand, en met een gesimuleerde IoT-knoop in je browser.</p>
+<p>Als er tijd over is maken we een begin met NodeRed: het programma waarmee je eenvoudig <em>controllers</em> kunt maken voor IoT-toepassingen. In zo’n controller verwerk je de sensordata, combineert deze eventueel met data en diensten “in the cloud”, en stuur je de actuatoren in de IoT-knopen aan.</p>
+</section>
+<section id="bijeenkomst-2">
+<h2>Bijeenkomst 2<a class="headerlink" href="#bijeenkomst-2" title="Permalink naar deze titel">#</a></h2>
+<p>We gaan nu met de <em>IoT-gateway</em> aan de slag: daarmee koppel je het microbit IoT-netwerk aan het internet. Je kunt dan de sensordata via het internet naar de controller sturen, en naar de web-app voor display van de data. En je kunt vanuit de web-app en de controller de actuator(en) van de IoT-knopen aansturen.
+Deze communicatie verloopt steeds via het MQTT protocol.</p>
+<p>In NodeRed maken we flows voor de verwerking van sensordata die via MQTT binnenkomt. Hiermee kun je een dashboard maken met een grafische weergaven van de sensordata.
+En we maken eenvoudige flows voor het (handmatig) aansturen van de actuatoren, weer via MQTT.</p>
+</section>
+<section id="bijeenkomst-3">
+<h2>Bijeenkomst 3<a class="headerlink" href="#bijeenkomst-3" title="Permalink naar deze titel">#</a></h2>
+<p>We maken de toepassing compleet, door in de NodeRed controller flows te maken waarin we de sensordata (en eventuele gebruikersinvoer) koppelen aan flows voor het aansturen van de actuator(en) van de IoT-knopen.</p>
+<p>We bespreken wat er nodig is om de toepassing uit te breiden: met extra sensoren; met extra IoT-knopen; met extra IoT-netwerken; met diensten “in the cloud”.</p>
+<p>Tenslotte gaan we in op de manier waarop je dit materiaal in de klas kunt gebruiken: wat heb je daarvoor nog meer nodig?</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="benodigd.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">vorige</p>
+        <p class="prev-next-title">Wat heb je nodig?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="bijeenkomst-1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">volgende</p>
+        <p class="prev-next-title">Bijeenkomst 1</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhoud
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#internet-of-things-architectuur-communicatie">Internet of Things: architectuur, communicatie</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bijeenkomst-1">Bijeenkomst 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bijeenkomst-2">Bijeenkomst 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bijeenkomst-3">Bijeenkomst 3</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Door Eelco Dijkstra
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

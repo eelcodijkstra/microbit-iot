@@ -1,0 +1,627 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="nl" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>ESP-AT gateway &#8212; IoT met de microbit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/assessment.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/assessment.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'espat-gateway';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Zoeken" href="search.html" />
+    <link rel="next" title="ESP-AT module" href="espat-module.html" />
+    <link rel="prev" title="radio-logger" href="microbit-logger.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="nl"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+    <p class="title logo__title">IoT met de micro:bit</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="inleiding.html">Inleiding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benodigd.html">Wat heb je nodig?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overzicht.html">Overzicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-1.html">Bijeenkomst 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-2.html">Bijeenkomst 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-3.html">Bijeenkomst 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lpp-payload.html">LPP payload formaat</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python-editor.html">Python op de microbit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbits-programmeren.html">Programmeren van de micro:bits</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="microbit-software.html">micro:bit software</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="microbit-iotnode.html">microbit IoT-knoop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="microbit-logger.html">radio-logger</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">ESP-AT gateway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="espat-module.html">ESP-AT module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lpp-module.html">LPP implementatie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json-module.html">JSON voor de microbit</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="presentaties.html">Presentaties</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-1.html">Presentatie-1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-2.html">Presentatie 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentatie-3.html">Presentatie 3</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download deze pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/espat-gateway.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download het bronbestand"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Afdrukken naar pdf"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Volledig scherm"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Zoeken" aria-label="Zoeken" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ESP-AT gateway</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhoud </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#voorbeelden-van-json-berichten">Voorbeelden van JSON-berichten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gateway-hardware-micro-bit-en-iot-bit">Gateway hardware: micro:bit en iot:bit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gateway-code">Gateway-code</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="esp-at-gateway">
+<h1>ESP-AT gateway<a class="headerlink" href="#esp-at-gateway" title="Permalink naar deze titel">#</a></h1>
+<p><strong>IoT gateway gebaseerd op ESP-AT module, voor gebruik met de iot:bit</strong></p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/iot-protocollen.drawio.png"><img alt="_images/iot-protocollen.drawio.png" src="_images/iot-protocollen.drawio.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Gateway als verbinding tussen het IoT-netwerk en het internet</span><a class="headerlink" href="#id2" title="Permallink naar deze afbeelding">#</a></p>
+</figcaption>
+</figure>
+<p>De ESP-AT gateway vormt de verbinding tussen een lokaal microbit-IoT-netwerk en het internet.
+Lokale (uplink) sensorberichten in LPP-formaat worden omgezet in JSON, en verstuurd via MQTT.
+Downlink actuatorberichten in JSON-formaat worden ontvangen via MQTT, omgezet naar LPP-formaat, en verstuurd naar het lokale microbit-netwerk.</p>
+<p>De IoT-knopen in het lokale netwerk hebben een (4-bytes) Node-ID, zoals gebruikelijk in het platform voor het keuzethema-materiaal. Aan de hand van de ontvangen uplink-berichten bepaalt de gateway welke nodes in het lokale netwerk aanwezig zijn. Alleen downlink-berichten voor deze nodes worden naar het lokale microbit-netwerk verstuurd.</p>
+<section id="voorbeelden-van-json-berichten">
+<h2>Voorbeelden van JSON-berichten<a class="headerlink" href="#voorbeelden-van-json-berichten" title="Permalink naar deze titel">#</a></h2>
+<p>Downlink-bericht (actuators):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;dOut&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w"> </span><span class="nt">&quot;8&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;aOut&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Merk op dat deze in tegenstelling tot de uplink-berichten alleen uit de payload bestaat. (Ja, dat is inderdaar niet erg consequent… Maar min of meer zo gegroeid… In een volgende versie aanpassen?)</p>
+<p>NB: in het binaire formaat in het microbit-netwerk gebruiken we voor sensoren en actuatoren hetzelfde formaat: de eerste 5 bytes zijn de protocol-id (1), node-id (2 bytes), en counter (2 bytes); daarna volgt de payload, in binair LPP-formaat.</p>
+<p>Uplink-bericht (sensoren):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;nodeid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fe3d&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;counter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3027</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">235</span><span class="p">},</span>
+<span class="w">   </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;barometer&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10093</span><span class="p">},</span>
+<span class="w">   </span><span class="nt">&quot;2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;dOut&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">   </span><span class="nt">&quot;8&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;aOut&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="gateway-hardware-micro-bit-en-iot-bit">
+<h2>Gateway hardware: micro:bit en iot:bit<a class="headerlink" href="#gateway-hardware-micro-bit-en-iot-bit" title="Permalink naar deze titel">#</a></h2>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="_images/microbit-gateway-hardware.drawio.png"><img alt="_images/microbit-gateway-hardware.drawio.png" src="_images/microbit-gateway-hardware.drawio.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">micro:bit met iot:bit (ESP-WiFi hardware module)</span><a class="headerlink" href="#id3" title="Permallink naar deze afbeelding">#</a></p>
+</figcaption>
+</figure>
+<p>De gateway bestaat uit een micro:bit in combinatie met een iot:bit bordje.
+Dit bordje heeft een ESP WiFi-module die via de serieverbinding met de micro:bit communiceert.
+De micro:bit bestuurt deze ESP WiFi-module door middel van AT-opdrachten.</p>
+</section>
+<section id="gateway-code">
+<span id="id1"></span><h2>Gateway-code<a class="headerlink" href="#gateway-code" title="Permalink naar deze titel">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ESP-AT gateway for microbit IoT-network</span>
+<span class="c1"># version 0.2 (EJD - 20230619)</span>
+
+<span class="kn">from</span> <span class="nn">microbit</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">radio</span>
+<span class="kn">from</span> <span class="nn">espat</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">ulpp</span> <span class="kn">import</span> <span class="n">bytes_to_dict</span><span class="p">,</span> <span class="n">dict_to_bytes</span>
+<span class="kn">import</span> <span class="nn">json</span> 
+
+<span class="c1"># gateway connection configuration</span>
+<span class="n">wifi_ssid</span> <span class="o">=</span> <span class="s1">&#39;infvo-iot&#39;</span>
+<span class="n">wifi_password</span> <span class="o">=</span> <span class="s1">&#39;LISP77(Midas&#39;</span>
+<span class="n">mqtt_user</span> <span class="o">=</span> <span class="s1">&#39;mqtttest&#39;</span>
+<span class="n">mqtt_password</span> <span class="o">=</span> <span class="s1">&#39;testmqtt&#39;</span>
+<span class="n">mqtt_host</span> <span class="o">=</span> <span class="s1">&#39;infvopedia.nl&#39;</span>
+<span class="n">mqtt_port</span> <span class="o">=</span> <span class="mi">1883</span>
+
+<span class="n">uplink_tag</span> <span class="o">=</span> <span class="mh">0x0A</span>
+<span class="n">downlink_tag</span> <span class="o">=</span> <span class="mh">0x0B</span>
+
+<span class="n">radio</span><span class="o">.</span><span class="n">on</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">log</span> <span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">radio</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+<span class="n">local_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># handle received MQTT message (from broker)</span>
+<span class="k">def</span> <span class="nf">on_mqtt_message</span> <span class="p">(</span><span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">log</span><span class="p">(</span><span class="s1">&#39;-topic: &#39;</span> <span class="o">+</span> <span class="n">topic</span><span class="p">)</span>
+    <span class="n">log</span><span class="p">(</span><span class="s1">&#39;-msg: &#39;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">)</span>
+    <span class="c1"># items = topic.decode(&#39;ascii&#39;).split(&#39;/&#39;)</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">topic</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;node&#39;</span> <span class="ow">and</span> <span class="n">items</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;actuators&#39;</span><span class="p">:</span>
+        <span class="n">nodeID</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nodeID</span> <span class="ow">in</span> <span class="n">local_nodes</span><span class="p">:</span>
+            <span class="n">lpp_bytes</span> <span class="o">=</span> <span class="n">dict_to_bytes</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+            <span class="n">downlink_header</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="mh">0x0B</span><span class="p">,</span> <span class="n">nodeID</span> <span class="o">//</span> <span class="mi">256</span><span class="p">,</span> <span class="n">nodeID</span> <span class="o">%</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">radio</span><span class="o">.</span><span class="n">send_bytes</span><span class="p">(</span><span class="n">downlink_header</span> <span class="o">+</span> <span class="n">lpp_bytes</span><span class="p">)</span>
+
+<span class="c1"># publish sensor data in JSON format to MQTT</span>
+<span class="k">def</span> <span class="nf">sensordata_to_mqtt</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">nodeID</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">nodeID</span> <span class="ow">in</span> <span class="n">local_nodes</span><span class="p">:</span>
+        <span class="n">local_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nodeID</span><span class="p">)</span>
+            
+    <span class="n">nodeID_hex</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0:x}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nodeID</span><span class="p">)</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">lpp_dict</span> <span class="o">=</span> <span class="n">bytes_to_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">5</span><span class="p">:])</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;nodeid&#39;</span><span class="p">:</span> <span class="n">nodeID_hex</span><span class="p">,</span>
+            <span class="s1">&#39;counter&#39;</span><span class="p">:</span> <span class="n">counter</span><span class="p">,</span>
+            <span class="s1">&#39;payload&#39;</span><span class="p">:</span> <span class="n">lpp_dict</span>
+    <span class="p">}</span>
+    <span class="n">log</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+    <span class="n">at_mqtt_publish</span><span class="p">(</span><span class="s1">&#39;node/</span><span class="si">{a}</span><span class="s1">/sensors&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">nodeID_hex</span><span class="p">),</span> 
+                    <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span>
+                     <span class="mi">0</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># should this be done in the library???</span>
+<span class="n">uart</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">baudrate</span><span class="o">=</span><span class="mi">115200</span><span class="p">,</span> <span class="n">tx</span><span class="o">=</span><span class="n">pin8</span><span class="p">,</span> <span class="n">rx</span><span class="o">=</span><span class="n">pin12</span><span class="p">)</span> <span class="c1"># connect to ESP8266</span>
+<span class="n">sleep</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+<span class="n">at_init_ESP</span><span class="p">()</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">at_wifi_connected</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">at_wifi_connect</span><span class="p">(</span><span class="n">wifi_ssid</span><span class="p">,</span> <span class="n">wifi_password</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">at_errorcode</span><span class="p">)</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+        <span class="n">at_init_ESP</span><span class="p">()</span>
+        <span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+
+<span class="n">mac_address</span> <span class="o">=</span> <span class="n">at_get_mac_address</span><span class="p">()</span>
+<span class="n">log</span><span class="p">(</span><span class="s1">&#39;My mac-addr: &#39;</span> <span class="o">+</span> <span class="n">mac_address</span><span class="p">)</span>
+
+<span class="n">at_mqtt_set_userconfig</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;gw-&#39;</span><span class="o">+</span><span class="n">mac_address</span><span class="p">,</span> <span class="n">mqtt_user</span><span class="p">,</span> <span class="n">mqtt_password</span><span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">)</span>
+
+<span class="n">mqtt_retries</span> <span class="o">=</span> <span class="mi">0</span>
+    
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">at_mqtt_connected</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">at_wifi_connected</span><span class="p">()</span> <span class="ow">or</span> <span class="n">mqtt_retries</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="n">reset</span><span class="p">()</span>
+        <span class="n">mqtt_retries</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">at_mqtt_connect</span><span class="p">(</span><span class="n">mqtt_host</span><span class="p">,</span> <span class="n">mqtt_port</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">at_set_on_mqtt_message</span><span class="p">(</span><span class="n">on_mqtt_message</span><span class="p">)</span>
+        <span class="n">at_mqtt_subscribe</span><span class="p">(</span><span class="s1">&#39;node/+/actuators&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+    
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">radio</span><span class="o">.</span><span class="n">receive_bytes</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">msg</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">uplink_tag</span><span class="p">:</span>
+            <span class="n">sensordata_to_mqtt</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                        
+    <span class="k">if</span> <span class="n">button_a</span><span class="o">.</span><span class="n">was_pressed</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">at_mqtt_connected</span><span class="p">():</span>
+            <span class="n">at_mqtt_publish</span><span class="p">(</span><span class="s1">&#39;gateway/hello&#39;</span><span class="p">,</span> <span class="s1">&#39;button A&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">at_check_input</span><span class="p">()</span>                      
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="microbit-logger.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">vorige</p>
+        <p class="prev-next-title">radio-logger</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="espat-module.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">volgende</p>
+        <p class="prev-next-title">ESP-AT module</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhoud
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#voorbeelden-van-json-berichten">Voorbeelden van JSON-berichten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gateway-hardware-micro-bit-en-iot-bit">Gateway hardware: micro:bit en iot:bit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gateway-code">Gateway-code</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Door Eelco Dijkstra
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

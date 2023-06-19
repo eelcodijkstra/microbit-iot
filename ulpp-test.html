@@ -1,0 +1,1056 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="nl" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>LPP implementatie &#8212; IoT met de microbit</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ulpp-test';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Zoeken" href="search.html" />
+    <link rel="next" title="ESP-AT library" href="espat-library.html" />
+    <link rel="prev" title="microbit-logger" href="microbit-logger.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="nl"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Internet of Things met de micro:bit
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="inleiding.html">Inleiding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overzicht.html">Overzicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-1.html">Bijeenkomst 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benodigd.html">Wat heb je nodig?</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="microbit-software.html">micro:bit software</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="microbit-iotnode.html">microbit IoT-knoop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="microbit-logger.html">microbit-logger</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">LPP implementatie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="espat-library.html">ESP-AT library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="espat-gateway.html">ESPAT-gateway</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json.html">JSON voor de microbit</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Bronopslagplaats"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fulpp-test.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open een probleem"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download deze pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/ulpp-test.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download het bronbestand"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Afdrukken naar pdf"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Volledig scherm"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Zoeken" aria-label="Zoeken" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>LPP implementatie</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhoud </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ulpp">module <code class="docutils literal notranslate"><span class="pre">ulpp</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-lppjson">module <code class="docutils literal notranslate"><span class="pre">lppjson</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functie-json-to-bytes">functie <code class="docutils literal notranslate"><span class="pre">json_to_bytes</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testen">Testen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-opbouwen-van-een-binaire-lpp-waarde">test: opbouwen van een binaire LPP-waarde</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#van-lpp-bytes-naar-json">van LPP-bytes naar JSON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#van-json-naar-lpp-bytes">Van JSON naar LPP-bytes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-lpp-to-json">Test <code class="docutils literal notranslate"><span class="pre">lpp_to_json</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lpp-implementatie">
+<h1>LPP implementatie<a class="headerlink" href="#lpp-implementatie" title="Permalink naar deze titel">#</a></h1>
+<p>De <code class="docutils literal notranslate"><span class="pre">ulpp</span></code> module verzorgt de codering en decodering van berichten in het binaire Cayenne LPP formaat.
+Voor een beschrijving van dit formaat, zie:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.mydevices.com/docs/lorawan/cayenne-lpp">https://docs.mydevices.com/docs/lorawan/cayenne-lpp</a></p></li>
+<li><p><a class="github reference external" href="https://github.com/myDevicesIoT/CayenneLPP">myDevicesIoT/CayenneLPP</a></p></li>
+<li><p><a class="github reference external" href="https://github.com/smlng/pycayennelpp">smlng/pycayennelpp</a></p>
+<ul>
+<li><p>dit is een uitgebreide Python-implementatie van Cayenne LPP</p></li>
+<li><p>deze beschrijft meer sensor-formaten dan de oorspronkelijk LPP versie</p></li>
+</ul>
+</li>
+</ul>
+<p>De <code class="docutils literal notranslate"><span class="pre">lppjson</span></code> module bevat een enkele functie, <code class="docutils literal notranslate"><span class="pre">lpp_to_json</span></code>, om binaire LPP berichten om te zetten in JSON string-formaat. Deze wordt o.a. gebruikt door de radio-logger.</p>
+<p>De <code class="docutils literal notranslate"><span class="pre">ulpp</span></code> module is een onafhankelijke implementatie van de codering en decodering, bedoeld om het gebruik van LPP voor de microbit eenvoudig te houden.</p>
+<p>De belangrijke elementen van deze library zijn:</p>
+<ul class="simple">
+<li><p>class LppBuffer</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">LppBuffer(prefix,</span> <span class="pre">maxsize)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer.add_digital_input(channel,</span> <span class="pre">value)</span></code> - etc.</p></li>
+<li><p>met varianten voor elk type sensor</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">frame.to_bytes()</span> <span class="pre">-&gt;</span> <span class="pre">bytes</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bytes_to_dict(bytes)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dict_to_bytes(dict)</span></code></p></li>
+</ul>
+<p>Via <code class="docutils literal notranslate"><span class="pre">LppBuffer</span></code> en <code class="docutils literal notranslate"><span class="pre">buffer.add_xxsensor(channel,</span> <span class="pre">value)</span></code> bouw je een array van getallen op die je als bytes-waarde kunt versturen.</p>
+<p>Deze bytes-waarde kun je ook omzetten (decoderen) met <code class="docutils literal notranslate"><span class="pre">bytes_to_dict()</span></code> in een Python dictionary - die je vervolgens kunt omzetten in JSON, voor een MQTT bericht.
+Via de codering <code class="docutils literal notranslate"><span class="pre">dict_to_bytes()</span></code> kun je een Python dictionary (in de geschikte LPP vorm!) omzetten naar een LPP bytes-waarde.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dict_to_bytes()</span></code> verwerkt in deze implementatie (voorlopig) alleen actuator-data: deze is bedoeld voor downlink-berichten.</p></li>
+</ul>
+<p>Daarnaast is er nog een afzonderlijke functie:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">json_to_lpp(s:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">bytes</span></code></p></li>
+</ul>
+<p>Voorbeelden van het gebruik:</p>
+<p><strong>IoT-knoop: opbouwen van een reeks sensorwaarden</strong>, en versturen als bytes-waarde (uplink).</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">prefix</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># prefix before LPP data</span>
+<span class="n">lpp</span> <span class="o">=</span> <span class="n">LppBuffer</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">prefix</span><span class="p">,</span> <span class="n">maxsize</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">lpp</span><span class="o">.</span><span class="n">add_digital_input</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">lpp</span><span class="o">.</span><span class="n">add_digital_output</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">lpp</span><span class="o">.</span><span class="n">add_analog_input</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1234</span><span class="p">)</span>
+<span class="n">lpp</span><span class="o">.</span><span class="n">add_analog_output</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1234</span><span class="p">)</span>
+<span class="n">lpp</span><span class="o">.</span><span class="n">add_luminosity</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">345</span><span class="p">)</span>
+<span class="n">lpp</span><span class="o">.</span><span class="n">add_presence</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">lpp</span><span class="o">.</span><span class="n">add_barometer</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10230</span><span class="p">)</span>
+<span class="n">lpp</span><span class="o">.</span><span class="n">add_temperature</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">23.4</span><span class="o">*</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">lpp</span><span class="o">.</span><span class="n">add_digital_input</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">radio</span><span class="o">.</span><span class="n">send_bytes</span><span class="p">(</span><span class="n">lpp</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><strong>IoT-knoop: omzetten van een ontvangen (binair) LPP-bericht in acties</strong> - afhandelen van actuator-data.</p>
+<p>(Dit wordt voorlopig ad-hoc in de IoT-knoop opgelost.)</p>
+<p><strong>Gateway: Omzetten (decoderen) van een ontvangen byte-array</strong> in een JSON-string, om te versturen via MQTT. (Uplink-berichten in de gateway.)</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># data bevat ontvangen radio-bericht: header, lpp payload</span>
+<span class="n">nodeID</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">lpp_dict</span> <span class="o">=</span> <span class="n">bytes_to_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">5</span><span class="p">:])</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;nodeid&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{0:x}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nodeID</span><span class="p">),</span>  <span class="c1"># in hex format</span>
+       <span class="s1">&#39;counter&#39;</span><span class="p">:</span> <span class="n">counter</span><span class="p">,</span>
+       <span class="s1">&#39;payload&#39;</span><span class="p">:</span> <span class="n">lpp_dict</span>
+       <span class="p">}</span>
+<span class="n">mqtt</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Gateway: van ontvangen JSON-string naar binair LPP downlink-bericht</strong></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="n">lpp_bytes</span> <span class="o">=</span> <span class="n">dict_to_bytes</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>   <span class="c1"># from JSON string to LPP byte-array</span>
+<span class="n">header_bytes</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="mh">0x0B</span><span class="p">,</span> <span class="n">nodeID</span> <span class="o">//</span> <span class="mi">256</span><span class="p">,</span> <span class="n">nodeID</span> <span class="o">%</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># downlink header  </span>
+<span class="n">radio</span><span class="o">.</span><span class="n">send_bytes</span><span class="p">(</span><span class="n">header_bytes</span> <span class="o">+</span> <span class="n">lpp_bytes</span><span class="p">)</span>    <span class="c1"># send header followed by LPP data</span>
+</pre></div>
+</div>
+<p><strong>Radio-logger: omzetten van (binaire) LPP-bytes naar LPP in JSON:</strong> <code class="docutils literal notranslate"><span class="pre">lpp_to_json(data:</span> <span class="pre">bytes)</span> <span class="pre">-&gt;</span> <span class="pre">str</span></code>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lpp_to_json</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="mi">5</span><span class="p">:])</span> <span class="c1"># skip radio msg header</span>
+</pre></div>
+</div>
+<section id="module-ulpp">
+<span id="id1"></span><h2>module <code class="docutils literal notranslate"><span class="pre">ulpp</span></code><a class="headerlink" href="#module-ulpp" title="Permalink naar deze titel">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LppBuffer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="c1"># some assumptions:</span>
+    <span class="c1"># - the value-parameters are in the LPP-required format and range</span>
+    <span class="c1">#   i.e. scaling is done by the caller (if needed)</span>
+    <span class="c1">#   all value-parameters are int</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">maxsize</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxsize</span> <span class="o">=</span> <span class="n">maxsize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">to_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">add_byte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxsize</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">OverflowError</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_unsigned_int16</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxsize</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">OverflowError</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">65536</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span> <span class="o">%</span> <span class="mi">65536</span>
+        <span class="p">(</span><span class="n">hi</span><span class="p">,</span> <span class="n">lo</span><span class="p">)</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hi</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lo</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_signed_int16</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span> <span class="o">+</span> <span class="mi">65536</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_unsigned_int16</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_digital_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_byte</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_digital_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_byte</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">add_analog_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_signed_int16</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_analog_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_signed_int16</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_luminosity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_unsigned_int16</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_presence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_byte</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="c1"># temperature: 0.1C, signed int</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_signed_int16</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_humidity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="c1"># rel. humidity: 0.5% unsigned byte</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_byte</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_barometer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="c1"># barometric pressue: 0.1 hPa unsigned int16</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_unsigned_int16</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">bytes_to_dict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+
+    <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">nextbyte</span><span class="p">():</span>
+        <span class="k">nonlocal</span> <span class="n">pos</span>
+        <span class="k">if</span> <span class="n">pos</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">OverflowError</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">value</span>
+    
+    <span class="k">def</span> <span class="nf">nextunsignedint</span><span class="p">():</span>
+        <span class="n">hi</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+        <span class="n">lo</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">hi</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">+</span> <span class="n">lo</span>
+        <span class="k">return</span> <span class="n">value</span> 
+    
+    <span class="k">def</span> <span class="nf">nextint</span><span class="p">():</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">nextunsignedint</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">32767</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span> <span class="o">-</span> <span class="mi">65536</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">while</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+            <span class="n">obj</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dIn&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+            <span class="n">obj</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dOut&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>                
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextint</span><span class="p">()</span>
+            <span class="n">obj</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;aIn&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>                
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextint</span><span class="p">()</span>
+            <span class="n">obj</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;aOut&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">101</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextunsignedint</span><span class="p">()</span>
+            <span class="n">obj</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;luminosity&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>                
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">102</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+            <span class="n">obj</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;presence&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>                
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">103</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextint</span><span class="p">()</span>                
+            <span class="n">obj</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>                
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">104</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+            <span class="n">obj</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;humidity&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>                
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">115</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextunsignedint</span><span class="p">()</span>
+            <span class="n">obj</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;barometer&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>
+            
+    <span class="k">return</span> <span class="n">obj</span>
+
+<span class="k">def</span> <span class="nf">dict_to_bytes</span> <span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="n">lpp</span> <span class="o">=</span> <span class="n">LppBuffer</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">:</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span>  <span class="c1"># item is an object with a single key...</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">channel</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;dOut&#39;</span><span class="p">:</span>
+                <span class="n">lpp</span><span class="o">.</span><span class="n">add_digital_output</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span>  <span class="n">item</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;aOut&#39;</span><span class="p">:</span>
+                <span class="n">lpp</span><span class="o">.</span><span class="n">add_analog_output</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span>  <span class="n">item</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># not implemented, raise exception? only output allowed</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;only output values allowed in actuator msg&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">lpp</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="module-lppjson">
+<span id="id2"></span><h2>module <code class="docutils literal notranslate"><span class="pre">lppjson</span></code><a class="headerlink" href="#module-lppjson" title="Permalink naar deze titel">#</a></h2>
+<p>De module <code class="docutils literal notranslate"><span class="pre">lppjson</span></code> heeft 1 functie, <code class="docutils literal notranslate"><span class="pre">lpp_to_json</span></code>. Deze wordt gebruikt in de radio-logger.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lpp_to_json</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    
+    <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">def</span> <span class="nf">nextbyte</span><span class="p">():</span>
+        <span class="k">nonlocal</span> <span class="n">pos</span>
+        <span class="k">if</span> <span class="n">pos</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">OverflowError</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">value</span>
+    
+    <span class="k">def</span> <span class="nf">nextunsignedint</span><span class="p">():</span>
+        <span class="n">hi</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+        <span class="n">lo</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">hi</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">+</span> <span class="n">lo</span> 
+    
+    <span class="k">def</span> <span class="nf">nextint</span><span class="p">():</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">nextunsignedint</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">32767</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span> <span class="o">-</span> <span class="mi">65536</span>
+        <span class="k">return</span> <span class="n">value</span>
+    
+    <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">json_string</span> <span class="o">=</span> <span class="s1">&#39;{&#39;</span>
+    <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="k">while</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="n">channel</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">tagname</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+            <span class="n">tagname</span> <span class="o">=</span> <span class="s1">&#39;dIn&#39;</span>
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+            <span class="n">tagname</span> <span class="o">=</span> <span class="s1">&#39;dOut&#39;</span>
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextint</span><span class="p">()</span>
+            <span class="n">tagname</span> <span class="o">=</span> <span class="s1">&#39;aIn&#39;</span>
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextint</span><span class="p">()</span>
+            <span class="n">tagname</span> <span class="o">=</span> <span class="s1">&#39;aOut&#39;</span>
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">101</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextunsignedint</span><span class="p">()</span>
+            <span class="n">tagname</span> <span class="o">=</span> <span class="s1">&#39;luminosity&#39;</span>
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">102</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+            <span class="n">tagname</span> <span class="o">=</span> <span class="s1">&#39;presence&#39;</span>
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">103</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextint</span><span class="p">()</span>                
+            <span class="n">tagname</span> <span class="o">=</span> <span class="s1">&#39;temperature&#39;</span>
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">104</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextbyte</span><span class="p">()</span>
+            <span class="n">tagname</span> <span class="o">=</span> <span class="s1">&#39;humidity&#39;</span>
+        <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="mi">115</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">nextunsignedint</span><span class="p">()</span>
+            <span class="n">tagname</span> <span class="o">=</span> <span class="s1">&#39;barometer&#39;</span>
+        <span class="n">json_string</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&quot;</span><span class="si">{1}</span><span class="s1">&quot;: {{&quot;</span><span class="si">{2}</span><span class="s1">&quot;: </span><span class="si">{3}</span><span class="s1">}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">tagname</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span>
+        
+    <span class="n">json_string</span> <span class="o">+=</span> <span class="s1">&#39;}&#39;</span> 
+    <span class="k">return</span> <span class="n">json_string</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="functie-json-to-bytes">
+<h2>functie <code class="docutils literal notranslate"><span class="pre">json_to_bytes</span></code><a class="headerlink" href="#functie-json-to-bytes" title="Permalink naar deze titel">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">json_to_bytes</span> <span class="p">(</span><span class="n">js</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">js</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dict_to_bytes</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="testen">
+<h2>Testen<a class="headerlink" href="#testen" title="Permalink naar deze titel">#</a></h2>
+<p>De onderstaande testen kunnen uitgevoerd worden in Jupyter Notebook.</p>
+<section id="test-opbouwen-van-een-binaire-lpp-waarde">
+<h3>test: opbouwen van een binaire LPP-waarde<a class="headerlink" href="#test-opbouwen-van-een-binaire-lpp-waarde" title="Permalink naar deze titel">#</a></h3>
+<p>Deze code vind je in de IoT-knoop, bij het versturen van de sensorwaarden.
+En mogelijk bij het opbouwen van een LPP-waarde met actuator-waarden, vanuit een toepassing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">header</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">frame</span> <span class="o">=</span> <span class="n">LppBuffer</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">maxsize</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">add_digital_input</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">add_digital_output</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">add_analog_input</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1234</span><span class="p">)</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">add_analog_output</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1234</span><span class="p">)</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">add_luminosity</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">345</span><span class="p">)</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">add_presence</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">add_barometer</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10230</span><span class="p">)</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">add_temperature</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">23.4</span><span class="o">*</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">frame</span><span class="o">.</span><span class="n">add_digital_input</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="c1"># radio.send_bytes(frame.to_bytes())</span>
+<span class="n">buffer</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 0, 0, 1, 1, 1, 1, 2, 2, 4, 210, 4, 3, 251, 46, 7, 101, 1, 89, 8, 102, 1, 9, 115, 39, 246, 5, 103, 0, 234, 10, 0, 1]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="van-lpp-bytes-naar-json">
+<h3>van LPP-bytes naar JSON<a class="headerlink" href="#van-lpp-bytes-naar-json" title="Permalink naar deze titel">#</a></h3>
+<p>In de gateway worden ontvangen (binaire) sensor-berichten omgezet in JSON-formaat, om te versturen via MQTT.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lppdata</span> <span class="o">=</span> <span class="n">bytes_to_dict</span><span class="p">(</span><span class="n">buffer</span><span class="p">[</span><span class="mi">5</span><span class="p">:])</span> <span class="c1"># skip header</span>
+<span class="n">lppdata</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: {&#39;dIn&#39;: 1},
+ 1: {&#39;dOut&#39;: 1},
+ 2: {&#39;aIn&#39;: 1234},
+ 4: {&#39;aOut&#39;: -1234},
+ 7: {&#39;luminosity&#39;: 345},
+ 8: {&#39;presence&#39;: 1},
+ 9: {&#39;barometer&#39;: 10230},
+ 5: {&#39;temperature&#39;: 234},
+ 10: {&#39;dIn&#39;: 1}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jsondata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">lppdata</span><span class="p">)</span>
+<span class="n">jsondata</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;{&quot;0&quot;: {&quot;dIn&quot;: 1}, &quot;1&quot;: {&quot;dOut&quot;: 1}, &quot;2&quot;: {&quot;aIn&quot;: 1234}, &quot;4&quot;: {&quot;aOut&quot;: -1234}, &quot;7&quot;: {&quot;luminosity&quot;: 345}, &quot;8&quot;: {&quot;presence&quot;: 1}, &quot;9&quot;: {&quot;barometer&quot;: 10230}, &quot;5&quot;: {&quot;temperature&quot;: 234}, &quot;10&quot;: {&quot;dIn&quot;: 1}}&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="van-json-naar-lpp-bytes">
+<h3>Van JSON naar LPP-bytes<a class="headerlink" href="#van-json-naar-lpp-bytes" title="Permalink naar deze titel">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lppdata1</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">jsondata</span><span class="p">)</span>
+<span class="n">lppdata1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;0&#39;: {&#39;dIn&#39;: 1},
+ &#39;1&#39;: {&#39;dOut&#39;: 1},
+ &#39;2&#39;: {&#39;aIn&#39;: 1234},
+ &#39;4&#39;: {&#39;aOut&#39;: -1234},
+ &#39;7&#39;: {&#39;luminosity&#39;: 345},
+ &#39;8&#39;: {&#39;presence&#39;: 1},
+ &#39;9&#39;: {&#39;barometer&#39;: 10230},
+ &#39;5&#39;: {&#39;temperature&#39;: 234},
+ &#39;10&#39;: {&#39;dIn&#39;: 1}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lppbytes1</span> <span class="o">=</span> <span class="n">dict_to_bytes</span><span class="p">(</span><span class="n">lppdata1</span><span class="p">)</span>
+<span class="n">lppbytes1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">lppbytes1</span> <span class="o">=</span> <span class="n">dict_to_bytes</span><span class="p">(</span><span class="n">lppdata1</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">lppbytes1</span>
+
+<span class="nn">Cell In[1], line 146,</span> in <span class="ni">dict_to_bytes</span><span class="nt">(obj)</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span>             <span class="n">lpp</span><span class="o">.</span><span class="n">add_analog_output</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span>  <span class="n">item</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">145</span>             <span class="c1"># not implemented, raise exception? only output allowed</span>
+<span class="ne">--&gt; </span><span class="mi">146</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;only output values allowed in actuator msg&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span> <span class="k">return</span> <span class="n">lpp</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">()</span>
+
+<span class="ne">ValueError</span>: only output values allowed in actuator msg
+</pre></div>
+</div>
+</div>
+</div>
+<p>Bovenstaande werkt niet in de (beperkte) implementatie van dict_to_bytes. Dit werkt wel als we de dictionary beperken tot alleen actuator-waarden.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lppbytes1</span> <span class="o">=</span> <span class="n">dict_to_bytes</span><span class="p">({</span><span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;dOut&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;aOut&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1234</span><span class="p">}})</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">lppbytes1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 1, 1, 4, 3, 251, 46]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nog een extra voorbeeld, met alleen actuator-waarden.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lpp</span> <span class="o">=</span> <span class="n">LppBuffer</span><span class="p">()</span>
+<span class="n">lpp</span><span class="o">.</span><span class="n">add_analog_output</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">123</span><span class="p">)</span>
+<span class="n">lpp</span><span class="o">.</span><span class="n">add_digital_output</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">lpp</span><span class="o">.</span><span class="n">add_analog_output</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">lppbuf</span> <span class="o">=</span> <span class="n">lpp</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">()</span>
+
+<span class="n">lppdict</span> <span class="o">=</span> <span class="n">bytes_to_dict</span><span class="p">(</span><span class="n">lppbuf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">dict_to_bytes</span><span class="p">(</span><span class="n">lppdict</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 3, 0, 123, 5, 1, 1, 6, 3, 255, 244]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Opmerking.</strong> Het is ook mogelijk om in de microbit de codering en codering uit te schrijven, als we niet genoeg geheugen hebben voor zo’n library. Zo complex is dat nu ook weer niet. Voor de microbit V2 is het geheugen niet zo’n probleem, maar voor de V1 (in Python) wel.</p>
+<p>(In de RF69-versie is die codering en codering ook uitgeschreven, zonder gebruik van een library.)</p>
+</section>
+<section id="test-lpp-to-json">
+<h3>Test <code class="docutils literal notranslate"><span class="pre">lpp_to_json</span></code><a class="headerlink" href="#test-lpp-to-json" title="Permalink naar deze titel">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lpp_to_json</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">251</span><span class="p">,</span> <span class="mi">46</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;{&quot;1&quot;: {&quot;dOut&quot;: 1}, &quot;4&quot;: {&quot;aOut&quot;: -1234}}&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lpp_to_json</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;{&quot;3&quot;: {&quot;dIn&quot;: 0}, &quot;2&quot;: {&quot;dIn&quot;: 0}, &quot;4&quot;: {&quot;aIn&quot;: 0}, &quot;6&quot;: {&quot;temperature&quot;: 200}}&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lpp_to_json</span><span class="p">([])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;{}&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Het omgekeerde: JSON naar LPP, gaat in twee stappen: (i) JSON naar Python object (via de json loads); (ii) dict_to_lpp - maar dit is beperkt tot een aantal actuator-waarden, specifiek voor de gateway downlink.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="microbit-logger.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">vorige</p>
+        <p class="prev-next-title">microbit-logger</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="espat-library.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">volgende</p>
+        <p class="prev-next-title">ESP-AT library</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhoud
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ulpp">module <code class="docutils literal notranslate"><span class="pre">ulpp</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-lppjson">module <code class="docutils literal notranslate"><span class="pre">lppjson</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functie-json-to-bytes">functie <code class="docutils literal notranslate"><span class="pre">json_to_bytes</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testen">Testen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-opbouwen-van-een-binaire-lpp-waarde">test: opbouwen van een binaire LPP-waarde</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#van-lpp-bytes-naar-json">van LPP-bytes naar JSON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#van-json-naar-lpp-bytes">Van JSON naar LPP-bytes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-lpp-to-json">Test <code class="docutils literal notranslate"><span class="pre">lpp_to_json</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Door Eelco Dijkstra
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

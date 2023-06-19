@@ -1,0 +1,1553 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="nl" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>OLED library &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'oled';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Zoeken" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="nl"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Internet of Things met de microbit
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="inleiding.html">Inleiding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overzicht.html">Overzicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-1.html">Bijeenkomst 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-2.html">Bijeenkomst 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bijeenkomst-3.html">Bijeenkomst 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iot-met-microbit.html">IoT met de microbit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gateway.html">microPython gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iotbit-gateway.html">iot:bit als gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbit-iotnode.html">microbit IoT-knoop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbit-radio.html">microbit-radio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="espat-library.html">ESP-AT library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="espat-gateway.html">ESPAT-gateway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="espat-test.html">ESP-AT test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="espat-node.html">ESP-AT IoT-node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ulpp-test.html">Module ulpp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json.html">JSON - voor de microbit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="umqtt.html">umqtt (simple)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nodered.html">NodeRed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbit-logger.html">microbit-logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="microbit-micropython.html">microPython voor de micro:bit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iot-ontwerpen.html">Ontwerpen van een IoT-toepassing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benodigd.html">Wat heb je nodig?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="making.html">The making of…</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepten.html">Concepten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Bronopslagplaats"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Foled.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open een probleem"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download deze pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/oled.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download het bronbestand"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Afdrukken naar pdf"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Volledig scherm"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Zoeken" aria-label="Zoeken" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>OLED library</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="oled-library">
+<h1>OLED library<a class="headerlink" href="#oled-library" title="Permalink naar deze titel">#</a></h1>
+<p>Onderstaande is afkomstig van <a class="github reference external" href="https://github.com/elecfreaks/Octopus_CircuitPython">elecfreaks/Octopus_CircuitPython</a></p>
+<p>(Dit lijkt op Makecode Python, in plaats van de gebruikelijke microbit Python???)</p>
+<p>Bestand: <a class="reference external" href="http://OLED.py">OLED.py</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">board</span>
+<span class="kn">import</span> <span class="nn">busio</span>
+<span class="kn">import</span> <span class="nn">adafruit_ssd1306</span>
+<span class="kn">from</span> <span class="nn">digitalio</span> <span class="kn">import</span> <span class="n">DigitalInOut</span>
+
+
+<span class="k">class</span> <span class="nc">OLED</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pinScl</span><span class="p">,</span> <span class="n">pinSda</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pinScl</span> <span class="o">=</span> <span class="n">pinScl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pinSda</span> <span class="o">=</span> <span class="n">pinSda</span>
+        <span class="n">i2c</span> <span class="o">=</span> <span class="n">busio</span><span class="o">.</span><span class="n">I2C</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pinScl</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pinSda</span><span class="p">)</span>
+        <span class="n">pinReset</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">GP5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span> <span class="o">=</span> <span class="n">adafruit_ssd1306</span><span class="o">.</span><span class="n">SSD1306_I2C</span><span class="p">(</span>
+            <span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">i2c</span><span class="p">,</span> <span class="n">addr</span><span class="o">=</span><span class="mh">0x3C</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="n">pinReset</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_show</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xStr</span><span class="p">,</span> <span class="n">yStr</span><span class="p">,</span> <span class="n">userStr</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xStr</span> <span class="o">=</span> <span class="n">xStr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yStr</span> <span class="o">=</span> <span class="n">yStr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">userStr</span> <span class="o">=</span> <span class="n">userStr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">userStrChange</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">userStr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">userStrChange</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xStr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yStr</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">set_clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">draw_rectangle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xRectangle</span><span class="p">,</span> <span class="n">yRectangle</span><span class="p">,</span> <span class="n">wRectangle</span><span class="p">,</span> <span class="n">hRectangle</span><span class="p">,</span> <span class="n">fill</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xRectangle</span> <span class="o">=</span> <span class="n">xRectangle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yRectangle</span> <span class="o">=</span> <span class="n">yRectangle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wRectangle</span> <span class="o">=</span> <span class="n">wRectangle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hRectangle</span> <span class="o">=</span> <span class="n">hRectangle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fill</span> <span class="o">=</span> <span class="n">fill</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xRectangle</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yRectangle</span><span class="p">,</span>
+                          <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wRectangle</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hRectangle</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">fill_rect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xRectangle</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yRectangle</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">wRectangle</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hRectangle</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">draw_circle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xCircle</span><span class="p">,</span> <span class="n">yCircle</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span><span class="n">fill</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xCircle</span> <span class="o">=</span> <span class="n">xCircle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yCircle</span> <span class="o">=</span> <span class="n">yCircle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fill</span> <span class="o">=</span> <span class="n">fill</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xCircle</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yCircle</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>            
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xCircle</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yCircle</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">draw_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1Line</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">y1Line</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x2Line</span> <span class="o">=</span> <span class="mi">127</span> <span class="p">,</span> <span class="n">y2Line</span> <span class="o">=</span> <span class="mi">63</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x1Line</span> <span class="o">=</span> <span class="n">x1Line</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y1Line</span> <span class="o">=</span> <span class="n">y1Line</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x2Line</span> <span class="o">=</span> <span class="n">x2Line</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y2Line</span> <span class="o">=</span> <span class="n">y2Line</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x1Line</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y1Line</span><span class="p">,</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">x2Line</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y2Line</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">set_pixel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xPixel</span> <span class="o">=</span> <span class="mi">63</span><span class="p">,</span> <span class="n">yPixel</span> <span class="o">=</span><span class="mi">31</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xPixel</span> <span class="o">=</span> <span class="n">xPixel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yPixel</span> <span class="o">=</span> <span class="n">yPixel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xPixel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yPixel</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Bestand: adafruit_framebuf.py</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SPDX-FileCopyrightText: &lt;text&gt; 2018 Kattni Rembor, Melissa LeBlanc-Williams</span>
+<span class="c1"># and Tony DiCola, for Adafruit Industries.</span>
+<span class="c1"># Original file created by Damien P. George &lt;/text&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: MIT</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">`adafruit_framebuf`</span>
+<span class="sd">====================================================</span>
+
+<span class="sd">CircuitPython pure-python framebuf module, based on the micropython framebuf module.</span>
+
+<span class="sd">Implementation Notes</span>
+<span class="sd">--------------------</span>
+
+<span class="sd">**Hardware:**</span>
+
+<span class="sd">* `Adafruit SSD1306 OLED displays &lt;https://www.adafruit.com/?q=ssd1306&gt;`_</span>
+<span class="sd">* `Adafruit HT16K33 Matrix displays &lt;https://www.adafruit.com/?q=ht16k33&gt;`_</span>
+
+<span class="sd">**Software and Dependencies:**</span>
+
+<span class="sd">* Adafruit CircuitPython firmware for the supported boards:</span>
+<span class="sd">  https://github.com/adafruit/circuitpython/releases</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.0.0+auto.0&quot;</span>
+<span class="n">__repo__</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/adafruit/Adafruit_CircuitPython_framebuf.git&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">struct</span>
+
+<span class="c1"># Framebuf format constants:</span>
+<span class="n">MVLSB</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Single bit displays (like SSD1306 OLED)</span>
+<span class="n">RGB565</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 16-bit color displays</span>
+<span class="n">GS4_HMSB</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Unimplemented!</span>
+<span class="n">MHMSB</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># Single bit displays like the Sharp Memory</span>
+<span class="n">RGB888</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># Neopixels and Dotstars</span>
+<span class="n">GS2_HMSB</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># 2-bit color displays like the HT16K33 8x8 Matrix</span>
+
+
+<span class="k">class</span> <span class="nc">GS2HMSBFormat</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;GS2HMSBFormat&quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_pixel</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a given pixel to a color.&quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span>
+        <span class="n">pixel</span> <span class="o">=</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+        <span class="n">shift</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mb">0b11</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="mb">0b11</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="n">color</span> <span class="o">&amp;</span> <span class="mb">0b11</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">shift</span>
+
+        <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span> <span class="o">|</span> <span class="p">(</span><span class="n">pixel</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">mask</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_pixel</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the color of a given pixel&quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span>
+        <span class="n">pixel</span> <span class="o">=</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+        <span class="n">shift</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mb">0b11</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">pixel</span> <span class="o">&gt;&gt;</span> <span class="n">shift</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mb">0b11</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">fill</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;completely fill/clear the buffer with a color&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">color</span><span class="p">:</span>
+            <span class="n">bits</span> <span class="o">=</span> <span class="n">color</span> <span class="o">&amp;</span> <span class="mb">0b11</span>
+            <span class="n">fill</span> <span class="o">=</span> <span class="p">(</span><span class="n">bits</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">bits</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">bits</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">bits</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fill</span> <span class="o">=</span> <span class="mh">0x00</span>
+
+        <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span> <span class="o">=</span> <span class="p">[</span><span class="n">fill</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">))]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">rect</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw the outline of a rectangle at the given location, size and color.&quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=too-many-arguments</span>
+        <span class="k">for</span> <span class="n">_x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">width</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">_y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">_x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">width</span><span class="p">]</span> <span class="ow">or</span> <span class="n">_y</span> <span class="ow">in</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span><span class="p">]:</span>
+                    <span class="n">GS2HMSBFormat</span><span class="o">.</span><span class="n">set_pixel</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">fill_rect</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw the outline and interior of a rectangle at the given location, size and color.&quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=too-many-arguments</span>
+        <span class="k">for</span> <span class="n">_x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">width</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">_y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span><span class="p">):</span>
+                <span class="n">GS2HMSBFormat</span><span class="o">.</span><span class="n">set_pixel</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MHMSBFormat</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;MHMSBFormat&quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_pixel</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a given pixel to a color.&quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">//</span> <span class="mi">8</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">-</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="mh">0x07</span>
+        <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&amp;</span> <span class="o">~</span><span class="p">(</span><span class="mh">0x01</span> <span class="o">&lt;&lt;</span> <span class="n">offset</span><span class="p">))</span> <span class="o">|</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">color</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">offset</span>
+        <span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_pixel</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the color of a given pixel&quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">//</span> <span class="mi">8</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">-</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="mh">0x07</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">offset</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x01</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">fill</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;completely fill/clear the buffer with a color&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">color</span><span class="p">:</span>
+            <span class="n">fill</span> <span class="o">=</span> <span class="mh">0xFF</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fill</span> <span class="o">=</span> <span class="mh">0x00</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">)):</span>  <span class="c1"># pylint: disable=consider-using-enumerate</span>
+            <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fill</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">fill_rect</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw a rectangle at the given location, size and color. The ``fill_rect`` method draws</span>
+<span class="sd">        both the outline and interior.&quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=too-many-arguments</span>
+        <span class="k">for</span> <span class="n">_x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">width</span><span class="p">):</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">-</span> <span class="n">_x</span> <span class="o">&amp;</span> <span class="mh">0x07</span>
+            <span class="k">for</span> <span class="n">_y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span><span class="p">):</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">_y</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">_x</span><span class="p">)</span> <span class="o">//</span> <span class="mi">8</span>
+                <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&amp;</span> <span class="o">~</span><span class="p">(</span><span class="mh">0x01</span> <span class="o">&lt;&lt;</span> <span class="n">offset</span><span class="p">))</span> <span class="o">|</span> <span class="p">(</span>
+                    <span class="p">(</span><span class="n">color</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">offset</span>
+                <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MVLSBFormat</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;MVLSBFormat&quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_pixel</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a given pixel to a color.&quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">x</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">y</span> <span class="o">&amp;</span> <span class="mh">0x07</span>
+        <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&amp;</span> <span class="o">~</span><span class="p">(</span><span class="mh">0x01</span> <span class="o">&lt;&lt;</span> <span class="n">offset</span><span class="p">))</span> <span class="o">|</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">color</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">offset</span>
+        <span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_pixel</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the color of a given pixel&quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">x</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">y</span> <span class="o">&amp;</span> <span class="mh">0x07</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">offset</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x01</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">fill</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;completely fill/clear the buffer with a color&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">color</span><span class="p">:</span>
+            <span class="n">fill</span> <span class="o">=</span> <span class="mh">0xFF</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fill</span> <span class="o">=</span> <span class="mh">0x00</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">)):</span>  <span class="c1"># pylint: disable=consider-using-enumerate</span>
+            <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fill</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">fill_rect</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw a rectangle at the given location, size and color. The ``fill_rect`` method draws</span>
+<span class="sd">        both the outline and interior.&quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=too-many-arguments</span>
+        <span class="k">while</span> <span class="n">height</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">x</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">y</span> <span class="o">&amp;</span> <span class="mh">0x07</span>
+            <span class="k">for</span> <span class="n">w_w</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+                <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="n">w_w</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="n">w_w</span><span class="p">]</span> <span class="o">&amp;</span> <span class="o">~</span><span class="p">(</span><span class="mh">0x01</span> <span class="o">&lt;&lt;</span> <span class="n">offset</span><span class="p">)</span>
+                <span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="n">color</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">offset</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">height</span> <span class="o">-=</span> <span class="mi">1</span>
+
+
+<span class="k">class</span> <span class="nc">RGB565Format</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class implements the RGB565 format</span>
+<span class="sd">    It assumes a little-endian byte order in the frame buffer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">color_to_rgb565</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a color in either tuple or 24 bit integer form to RGB565,</span>
+<span class="sd">        and return as two bytes&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">hibyte</span> <span class="o">=</span> <span class="p">(</span><span class="n">color</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0xF8</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">color</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="n">lobyte</span> <span class="o">=</span> <span class="p">((</span><span class="n">color</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xE0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">color</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hibyte</span> <span class="o">=</span> <span class="p">((</span><span class="n">color</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xF8</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="n">color</span> <span class="o">&gt;&gt;</span> <span class="mi">13</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x07</span><span class="p">)</span>
+            <span class="n">lobyte</span> <span class="o">=</span> <span class="p">((</span><span class="n">color</span> <span class="o">&gt;&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xE0</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="n">color</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x1F</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">lobyte</span><span class="p">,</span> <span class="n">hibyte</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">set_pixel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a given pixel to a color.&quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span> <span class="p">:</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_to_rgb565</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_pixel</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the color of a given pixel&quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="n">lobyte</span><span class="p">,</span> <span class="n">hibyte</span> <span class="o">=</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span> <span class="p">:</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">hibyte</span> <span class="o">&amp;</span> <span class="mh">0xF8</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="p">((</span><span class="n">hibyte</span> <span class="o">&amp;</span> <span class="mh">0x07</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="n">lobyte</span> <span class="o">&amp;</span> <span class="mh">0xE0</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">lobyte</span> <span class="o">&amp;</span> <span class="mh">0x1F</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">r</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">g</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">b</span>
+
+    <span class="k">def</span> <span class="nf">fill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">framebuf</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;completely fill/clear the buffer with a color&quot;&quot;&quot;</span>
+        <span class="n">rgb565_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_to_rgb565</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">rgb565_color</span>
+
+    <span class="k">def</span> <span class="nf">fill_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw a rectangle at the given location, size and color. The ``fill_rect`` method draws</span>
+<span class="sd">        both the outline and interior.&quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=too-many-arguments</span>
+        <span class="n">rgb565_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_to_rgb565</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">height</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">offset2</span> <span class="o">=</span> <span class="n">_y</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span>
+            <span class="k">for</span> <span class="n">_x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">width</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="n">offset2</span> <span class="o">+</span> <span class="n">_x</span>
+                <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span> <span class="p">:</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">rgb565_color</span>
+
+
+<span class="k">class</span> <span class="nc">RGB888Format</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;RGB888Format&quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_pixel</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a given pixel to a color.&quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span> <span class="p">:</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span> <span class="p">:</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span>
+                <span class="p">((</span><span class="n">color</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">255</span><span class="p">,</span> <span class="p">(</span><span class="n">color</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">255</span><span class="p">,</span> <span class="n">color</span> <span class="o">&amp;</span> <span class="mi">255</span><span class="p">)</span>
+            <span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_pixel</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the color of a given pixel&quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="o">|</span> <span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span>
+            <span class="o">|</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">fill</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;completely fill/clear the buffer with a color&quot;&quot;&quot;</span>
+        <span class="n">fill</span> <span class="o">=</span> <span class="p">(</span><span class="n">color</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">255</span><span class="p">,</span> <span class="p">(</span><span class="n">color</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">255</span><span class="p">,</span> <span class="n">color</span> <span class="o">&amp;</span> <span class="mi">255</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">),</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">fill</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">fill_rect</span><span class="p">(</span><span class="n">framebuf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw a rectangle at the given location, size and color. The ``fill_rect`` method draws</span>
+<span class="sd">        both the outline and interior.&quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=too-many-arguments</span>
+        <span class="n">fill</span> <span class="o">=</span> <span class="p">(</span><span class="n">color</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">255</span><span class="p">,</span> <span class="p">(</span><span class="n">color</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">255</span><span class="p">,</span> <span class="n">color</span> <span class="o">&amp;</span> <span class="mi">255</span>
+        <span class="k">for</span> <span class="n">_x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">width</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">_y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span><span class="p">):</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">_y</span> <span class="o">*</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="n">_x</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
+                <span class="n">framebuf</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">index</span> <span class="p">:</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">fill</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">FrameBuffer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FrameBuffer object.</span>
+
+<span class="sd">    :param buf: An object with a buffer protocol which must be large enough to contain every</span>
+<span class="sd">                pixel defined by the width, height and format of the FrameBuffer.</span>
+<span class="sd">    :param width: The width of the FrameBuffer in pixel</span>
+<span class="sd">    :param height: The height of the FrameBuffer in pixel</span>
+<span class="sd">    :param buf_format: Specifies the type of pixel used in the FrameBuffer; permissible values</span>
+<span class="sd">                        are listed under Constants below. These set the number of bits used to</span>
+<span class="sd">                        encode a color value and the layout of these bits in ``buf``. Where a</span>
+<span class="sd">                        color value c is passed to a method, c is  a small integer with an encoding</span>
+<span class="sd">                        that is dependent on the format of the FrameBuffer.</span>
+<span class="sd">    :param stride: The number of pixels between each horizontal line of pixels in the</span>
+<span class="sd">                   FrameBuffer. This defaults to ``width`` but may need adjustments when</span>
+<span class="sd">                   implementing a FrameBuffer within another larger FrameBuffer or screen. The</span>
+<span class="sd">                   ``buf`` size must accommodate an increased step size.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">buf_format</span><span class="o">=</span><span class="n">MVLSB</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=too-many-arguments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buf</span> <span class="o">=</span> <span class="n">buf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">=</span> <span class="n">stride</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_font</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="k">if</span> <span class="n">buf_format</span> <span class="o">==</span> <span class="n">MVLSB</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">MVLSBFormat</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">buf_format</span> <span class="o">==</span> <span class="n">MHMSB</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">MHMSBFormat</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">buf_format</span> <span class="o">==</span> <span class="n">RGB888</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">RGB888Format</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">buf_format</span> <span class="o">==</span> <span class="n">RGB565</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">RGB565Format</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">buf_format</span> <span class="o">==</span> <span class="n">GS2_HMSB</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">GS2HMSBFormat</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid format&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rotation</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rotation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The rotation setting of the display, can be one of (0, 1, 2, 3)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rotation</span>
+
+    <span class="nd">@rotation</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">rotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Bad rotation setting&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rotation</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="k">def</span> <span class="nf">fill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fill the entire FrameBuffer with the specified color.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fill_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw a rectangle at the given location, size and color. The ``fill_rect`` method draws</span>
+<span class="sd">        both the outline and interior.&quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=too-many-arguments, too-many-boolean-expressions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">pixel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;If ``color`` is not given, get the color value of the specified pixel. If ``color`` is</span>
+<span class="sd">        given, set the specified pixel to the given color.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotation</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotation</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotation</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">get_pixel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">set_pixel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">hline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw a horizontal line up to a given length.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">vline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw a vertical line up to a given length.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">circle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw a circle at the given midpoint location, radius and color.</span>
+<span class="sd">        The ```circle``` method draws only a 1 pixel outline.&quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">d_x</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">d_y</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">d_x</span> <span class="o">-</span> <span class="p">(</span><span class="n">radius</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">y</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">center_x</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="n">center_y</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">center_x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">center_y</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="n">center_y</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="n">center_y</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="n">center_y</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="n">center_y</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">center_x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">center_y</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">center_x</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="n">center_y</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">err</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">y</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">err</span> <span class="o">+=</span> <span class="n">d_y</span>
+                <span class="n">d_y</span> <span class="o">+=</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="n">err</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="n">d_x</span> <span class="o">+=</span> <span class="mi">2</span>
+                <span class="n">err</span> <span class="o">+=</span> <span class="n">d_x</span> <span class="o">-</span> <span class="p">(</span><span class="n">radius</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw a rectangle at the given location, size and color. The ```rect``` method draws only</span>
+<span class="sd">        a 1 pixel outline.&quot;&quot;&quot;</span>
+        <span class="c1"># pylint: disable=too-many-arguments</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotation</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>
+            <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">width</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotation</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">width</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="n">height</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotation</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>
+            <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">y</span> <span class="o">-</span> <span class="n">height</span>
+
+        <span class="c1"># pylint: disable=too-many-boolean-expressions</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">width</span> <span class="o">&lt;</span> <span class="mi">1</span>
+            <span class="ow">or</span> <span class="n">height</span> <span class="o">&lt;</span> <span class="mi">1</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">width</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">height</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+            <span class="ow">or</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
+            <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span>
+        <span class="p">):</span>
+            <span class="k">return</span>
+        <span class="n">x_end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">y_end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fill</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">fill_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x_end</span> <span class="o">-</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_end</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">fill_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x_end</span> <span class="o">-</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">fill_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_end</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">fill_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y_end</span><span class="p">,</span> <span class="n">x_end</span> <span class="o">-</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">fill_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_end</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_end</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">y_0</span><span class="p">,</span> <span class="n">x_1</span><span class="p">,</span> <span class="n">y_1</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=too-many-arguments</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Bresenham&#39;s line algorithm&quot;&quot;&quot;</span>
+        <span class="n">d_x</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_1</span> <span class="o">-</span> <span class="n">x_0</span><span class="p">)</span>
+        <span class="n">d_y</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y_1</span> <span class="o">-</span> <span class="n">y_0</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">y_0</span>
+        <span class="n">s_x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x_0</span> <span class="o">&gt;</span> <span class="n">x_1</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="n">s_y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">y_0</span> <span class="o">&gt;</span> <span class="n">y_1</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">d_x</span> <span class="o">&gt;</span> <span class="n">d_y</span><span class="p">:</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">d_x</span> <span class="o">/</span> <span class="mf">2.0</span>
+            <span class="k">while</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">x_1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+                <span class="n">err</span> <span class="o">-=</span> <span class="n">d_y</span>
+                <span class="k">if</span> <span class="n">err</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">y</span> <span class="o">+=</span> <span class="n">s_y</span>
+                    <span class="n">err</span> <span class="o">+=</span> <span class="n">d_x</span>
+                <span class="n">x</span> <span class="o">+=</span> <span class="n">s_x</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">d_y</span> <span class="o">/</span> <span class="mf">2.0</span>
+            <span class="k">while</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">y_1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+                <span class="n">err</span> <span class="o">-=</span> <span class="n">d_x</span>
+                <span class="k">if</span> <span class="n">err</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">x</span> <span class="o">+=</span> <span class="n">s_x</span>
+                    <span class="n">err</span> <span class="o">+=</span> <span class="n">d_y</span>
+                <span class="n">y</span> <span class="o">+=</span> <span class="n">s_y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">blit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;blit is not yet implemented&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">scroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">delta_y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;shifts framebuf in x and y direction&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">delta_x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">shift_x</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">xend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">+</span> <span class="n">delta_x</span>
+            <span class="n">dt_x</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shift_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">xend</span> <span class="o">=</span> <span class="n">delta_x</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">dt_x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">delta_y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">yend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">+</span> <span class="n">delta_y</span>
+            <span class="n">dt_y</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">yend</span> <span class="o">=</span> <span class="n">delta_y</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">dt_y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">while</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">yend</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">shift_x</span>
+            <span class="k">while</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">xend</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">set_pixel</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">get_pixel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">delta_x</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">delta_y</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">x</span> <span class="o">+=</span> <span class="n">dt_x</span>
+            <span class="n">y</span> <span class="o">+=</span> <span class="n">dt_y</span>
+
+    <span class="c1"># pylint: disable=too-many-arguments</span>
+    <span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">font_name</span><span class="o">=</span><span class="s2">&quot;font5x8.bin&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Place text on the screen in variables sizes. Breaks on \n to next line.</span>
+
+<span class="sd">        Does not break on line going off screen.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># determine our effective width/height, taking rotation into account</span>
+        <span class="n">frame_width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span>
+        <span class="n">frame_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotation</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="n">frame_width</span><span class="p">,</span> <span class="n">frame_height</span> <span class="o">=</span> <span class="n">frame_height</span><span class="p">,</span> <span class="n">frame_width</span>
+
+        <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_font</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_font</span><span class="o">.</span><span class="n">font_name</span> <span class="o">!=</span> <span class="n">font_name</span><span class="p">:</span>
+                <span class="c1"># load the font!</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_font</span> <span class="o">=</span> <span class="n">BitmapFont</span><span class="p">(</span><span class="n">font_name</span><span class="p">)</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_font</span><span class="o">.</span><span class="n">font_width</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_font</span><span class="o">.</span><span class="n">font_height</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chunk</span><span class="p">):</span>
+                <span class="n">char_x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="p">(</span><span class="n">width</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">size</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="n">char_x</span> <span class="o">+</span> <span class="p">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">size</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+                    <span class="ow">and</span> <span class="n">char_x</span> <span class="o">&lt;</span> <span class="n">frame_width</span>
+                    <span class="ow">and</span> <span class="n">y</span> <span class="o">+</span> <span class="p">(</span><span class="n">height</span> <span class="o">*</span> <span class="n">size</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+                    <span class="ow">and</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">frame_height</span>
+                <span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_font</span><span class="o">.</span><span class="n">draw_char</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">char_x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">+=</span> <span class="n">height</span> <span class="o">*</span> <span class="n">size</span>
+
+    <span class="c1"># pylint: enable=too-many-arguments</span>
+
+    <span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set buffer to value of Python Imaging Library image.  The image should</span>
+<span class="sd">        be in 1 bit mode and a size equal to the display size.&quot;&quot;&quot;</span>
+        <span class="c1"># determine our effective width/height, taking rotation into account</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotation</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="p">(</span><span class="n">RGB565Format</span><span class="p">,</span> <span class="n">RGB888Format</span><span class="p">))</span> <span class="ow">and</span> <span class="n">img</span><span class="o">.</span><span class="n">mode</span> <span class="o">!=</span> <span class="s2">&quot;RGB&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Image must be in mode RGB.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="p">(</span><span class="n">MHMSBFormat</span><span class="p">,</span> <span class="n">MVLSBFormat</span><span class="p">))</span> <span class="ow">and</span> <span class="n">img</span><span class="o">.</span><span class="n">mode</span> <span class="o">!=</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Image must be in mode 1.&quot;</span><span class="p">)</span>
+
+        <span class="n">imwidth</span><span class="p">,</span> <span class="n">imheight</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">if</span> <span class="n">imwidth</span> <span class="o">!=</span> <span class="n">width</span> <span class="ow">or</span> <span class="n">imheight</span> <span class="o">!=</span> <span class="n">height</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Image must be same dimensions as display (</span><span class="si">{</span><span class="n">width</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">).&quot;</span>
+            <span class="p">)</span>
+        <span class="c1"># Grab all the pixels from the image, faster than getpixel.</span>
+        <span class="n">pixels</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+        <span class="c1"># Clear buffer</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buf</span><span class="p">)):</span>  <span class="c1"># pylint: disable=consider-using-enumerate</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># Iterate through the pixels</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>  <span class="c1"># yes this double loop is slow,</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>  <span class="c1">#  but these displays are small!</span>
+                <span class="k">if</span> <span class="n">img</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;RGB&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">pixels</span><span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)])</span>
+                <span class="k">elif</span> <span class="n">pixels</span><span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># only write if pixel is true</span>
+
+
+<span class="c1"># MicroPython basic bitmap font renderer.</span>
+<span class="c1"># Author: Tony DiCola</span>
+<span class="c1"># License: MIT License (https://opensource.org/licenses/MIT)</span>
+<span class="k">class</span> <span class="nc">BitmapFont</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A helper class to read binary font tiles and &#39;seek&#39; through them as a</span>
+<span class="sd">    file to display in a framebuffer. We use file access so we dont waste 1KB</span>
+<span class="sd">    of RAM on a font!&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">font_name</span><span class="o">=</span><span class="s2">&quot;font5x8.bin&quot;</span><span class="p">):</span>
+        <span class="c1"># Specify the drawing area width and height, and the pixel function to</span>
+        <span class="c1"># call when drawing pixels (should take an x and y param at least).</span>
+        <span class="c1"># Optionally specify font_name to override the font file to use (default</span>
+        <span class="c1"># is font5x8.bin).  The font format is a binary file with the following</span>
+        <span class="c1"># format:</span>
+        <span class="c1"># - 1 unsigned byte: font character width in pixels</span>
+        <span class="c1"># - 1 unsigned byte: font character height in pixels</span>
+        <span class="c1"># - x bytes: font data, in ASCII order covering all 255 characters.</span>
+        <span class="c1">#            Each character should have a byte for each pixel column of</span>
+        <span class="c1">#            data (i.e. a 5x8 font has 5 bytes per character).</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">font_name</span> <span class="o">=</span> <span class="n">font_name</span>
+
+        <span class="c1"># Open the font file and grab the character width and height values.</span>
+        <span class="c1"># Note that only fonts up to 8 pixels tall are currently supported.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_font</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>  <span class="c1"># pylint: disable=consider-using-with</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">font_name</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">font_width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_height</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;BB&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_font</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+            <span class="c1"># simple font file validation check based on expected file size</span>
+            <span class="k">if</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">256</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_width</span> <span class="o">!=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">font_name</span><span class="p">)[</span><span class="mi">6</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Invalid font file: &quot;</span> <span class="o">+</span> <span class="n">font_name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not find font file&quot;</span><span class="p">,</span> <span class="n">font_name</span><span class="p">)</span>
+            <span class="k">raise</span>
+        <span class="k">except</span> <span class="ne">OverflowError</span><span class="p">:</span>
+            <span class="c1"># os.stat can throw this on boards without long int support</span>
+            <span class="c1"># just hope the font file is valid and press on</span>
+            <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">deinit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Close the font file as cleanup.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_font</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize/open the font file&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exception_type</span><span class="p">,</span> <span class="n">exception_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;cleanup on exit&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deinit</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">draw_char</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">framebuffer</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">):</span>  <span class="c1"># pylint: disable=too-many-arguments</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw one character at position (x,y) to a framebuffer in a given color&quot;&quot;&quot;</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Don&#39;t draw the character if it will be clipped off the visible area.</span>
+        <span class="c1"># if x &lt; -self.font_width or x &gt;= framebuffer.width or \</span>
+        <span class="c1">#   y &lt; -self.font_height or y &gt;= framebuffer.height:</span>
+        <span class="c1">#    return</span>
+        <span class="c1"># Go through each column of the character.</span>
+        <span class="k">for</span> <span class="n">char_x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font_width</span><span class="p">):</span>
+            <span class="c1"># Grab the byte for the current column of font data.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_font</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_width</span><span class="p">)</span> <span class="o">+</span> <span class="n">char_x</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_font</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+                <span class="k">continue</span>  <span class="c1"># maybe character isnt there? go to next</span>
+            <span class="c1"># Go through each row in the column byte.</span>
+            <span class="k">for</span> <span class="n">char_y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font_height</span><span class="p">):</span>
+                <span class="c1"># Draw a pixel for each bit that&#39;s flipped on.</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">line</span> <span class="o">&gt;&gt;</span> <span class="n">char_y</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">:</span>
+                    <span class="n">framebuffer</span><span class="o">.</span><span class="n">fill_rect</span><span class="p">(</span>
+                        <span class="n">x</span> <span class="o">+</span> <span class="n">char_x</span> <span class="o">*</span> <span class="n">size</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">char_y</span> <span class="o">*</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">color</span>
+                    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the pixel width of the specified text message.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font_width</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">FrameBuffer1</span><span class="p">(</span><span class="n">FrameBuffer</span><span class="p">):</span>  <span class="c1"># pylint: disable=abstract-method</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FrameBuffer1 object. Inherits from FrameBuffer.&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SPDX-FileCopyrightText: 2017 Michael McWethy for Adafruit Industries</span>
+<span class="c1">#</span>
+<span class="c1"># SPDX-License-Identifier: MIT</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">`adafruit_ssd1306`</span>
+<span class="sd">====================================================</span>
+
+<span class="sd">MicroPython SSD1306 OLED driver, I2C and SPI interfaces</span>
+
+<span class="sd">* Author(s): Tony DiCola, Michael McWethy</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">micropython</span> <span class="kn">import</span> <span class="n">const</span>
+<span class="kn">from</span> <span class="nn">adafruit_bus_device</span> <span class="kn">import</span> <span class="n">i2c_device</span><span class="p">,</span> <span class="n">spi_device</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># MicroPython framebuf import</span>
+    <span class="kn">import</span> <span class="nn">framebuf</span>
+
+    <span class="n">_FRAMEBUF_FORMAT</span> <span class="o">=</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">MONO_VLSB</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># CircuitPython framebuf import</span>
+    <span class="kn">import</span> <span class="nn">adafruit_framebuf</span> <span class="k">as</span> <span class="nn">framebuf</span>
+
+    <span class="n">_FRAMEBUF_FORMAT</span> <span class="o">=</span> <span class="n">framebuf</span><span class="o">.</span><span class="n">MVLSB</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Used only for typing</span>
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+    <span class="kn">import</span> <span class="nn">busio</span>
+    <span class="kn">import</span> <span class="nn">digitalio</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.0.0+auto.0&quot;</span>
+<span class="n">__repo__</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/adafruit/Adafruit_CircuitPython_SSD1306.git&quot;</span>
+
+<span class="c1"># register definitions</span>
+<span class="n">SET_CONTRAST</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0x81</span><span class="p">)</span>
+<span class="n">SET_ENTIRE_ON</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0xA4</span><span class="p">)</span>
+<span class="n">SET_NORM_INV</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0xA6</span><span class="p">)</span>
+<span class="n">SET_DISP</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0xAE</span><span class="p">)</span>
+<span class="n">SET_MEM_ADDR</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0x20</span><span class="p">)</span>
+<span class="n">SET_COL_ADDR</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0x21</span><span class="p">)</span>
+<span class="n">SET_PAGE_ADDR</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0x22</span><span class="p">)</span>
+<span class="n">SET_DISP_START_LINE</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0x40</span><span class="p">)</span>
+<span class="n">SET_SEG_REMAP</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0xA0</span><span class="p">)</span>
+<span class="n">SET_MUX_RATIO</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0xA8</span><span class="p">)</span>
+<span class="n">SET_IREF_SELECT</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0xAD</span><span class="p">)</span>
+<span class="n">SET_COM_OUT_DIR</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0xC0</span><span class="p">)</span>
+<span class="n">SET_DISP_OFFSET</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0xD3</span><span class="p">)</span>
+<span class="n">SET_COM_PIN_CFG</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0xDA</span><span class="p">)</span>
+<span class="n">SET_DISP_CLK_DIV</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0xD5</span><span class="p">)</span>
+<span class="n">SET_PRECHARGE</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0xD9</span><span class="p">)</span>
+<span class="n">SET_VCOM_DESEL</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0xDB</span><span class="p">)</span>
+<span class="n">SET_CHARGE_PUMP</span> <span class="o">=</span> <span class="n">const</span><span class="p">(</span><span class="mh">0x8D</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_SSD1306</span><span class="p">(</span><span class="n">framebuf</span><span class="o">.</span><span class="n">FrameBuffer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for SSD1306 display driver&quot;&quot;&quot;</span>
+
+    <span class="c1"># pylint: disable-msg=too-many-arguments</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">buffer</span><span class="p">:</span> <span class="nb">memoryview</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">external_vcc</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">reset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">digitalio</span><span class="o">.</span><span class="n">DigitalInOut</span><span class="p">],</span>
+        <span class="n">page_addressing</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">_FRAMEBUF_FORMAT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">external_vcc</span> <span class="o">=</span> <span class="n">external_vcc</span>
+        <span class="c1"># reset may be None if not needed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_pin</span> <span class="o">=</span> <span class="n">reset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_addressing</span> <span class="o">=</span> <span class="n">page_addressing</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reset_pin</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset_pin</span><span class="o">.</span><span class="n">switch_to_output</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">//</span> <span class="mi">8</span>
+        <span class="c1"># Note the subclass must initialize self.framebuf to a framebuffer.</span>
+        <span class="c1"># This is necessary because the underlying data buffer is different</span>
+        <span class="c1"># between I2C and SPI implementations (I2C needs an extra byte).</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_power</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="c1"># Parameters for efficient Page Addressing Mode (typical of U8Glib libraries)</span>
+        <span class="c1"># Important as not all screens appear to support Horizontal Addressing Mode</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_addressing</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pagebuffer</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">width</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># type: Optional[bytearray]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pagebuffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x40</span>  <span class="c1"># Set first byte of data buffer to Co=0, D/C=1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">page_column_start</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># type: Optional[bytearray]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">page_column_start</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">%</span> <span class="mi">32</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">page_column_start</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x10</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">//</span> <span class="mi">32</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pagebuffer</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">page_column_start</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># Let&#39;s get moving!</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poweron</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_display</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;True if the display is currently powered on, otherwise False&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_power</span>
+
+    <span class="k">def</span> <span class="nf">init_display</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Base class to initialize display&quot;&quot;&quot;</span>
+        <span class="c1"># The various screen sizes available with the ssd1306 OLED driver</span>
+        <span class="c1"># chip require differing configuration values for the display clock</span>
+        <span class="c1"># div and com pin, which are listed below for reference and future</span>
+        <span class="c1"># compatibility:</span>
+        <span class="c1">#    w,  h: DISP_CLK_DIV  COM_PIN_CFG</span>
+        <span class="c1">#  128, 64:         0x80         0x12</span>
+        <span class="c1">#  128, 32:         0x80         0x02</span>
+        <span class="c1">#   96, 16:         0x60         0x02</span>
+        <span class="c1">#   64, 48:         0x80         0x12</span>
+        <span class="c1">#   64, 32:         0x80         0x12</span>
+        <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="n">SET_DISP</span><span class="p">,</span>  <span class="c1"># off</span>
+            <span class="c1"># address setting</span>
+            <span class="n">SET_MEM_ADDR</span><span class="p">,</span>
+            <span class="mh">0x10</span>  <span class="c1"># Page Addressing Mode</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_addressing</span>
+            <span class="k">else</span> <span class="mh">0x00</span><span class="p">,</span>  <span class="c1"># Horizontal Addressing Mode</span>
+            <span class="c1"># resolution and layout</span>
+            <span class="n">SET_DISP_START_LINE</span><span class="p">,</span>
+            <span class="n">SET_SEG_REMAP</span> <span class="o">|</span> <span class="mh">0x01</span><span class="p">,</span>  <span class="c1"># column addr 127 mapped to SEG0</span>
+            <span class="n">SET_MUX_RATIO</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="n">SET_COM_OUT_DIR</span> <span class="o">|</span> <span class="mh">0x08</span><span class="p">,</span>  <span class="c1"># scan from COM[N] to COM0</span>
+            <span class="n">SET_DISP_OFFSET</span><span class="p">,</span>
+            <span class="mh">0x00</span><span class="p">,</span>
+            <span class="n">SET_COM_PIN_CFG</span><span class="p">,</span>
+            <span class="mh">0x02</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="k">else</span> <span class="mh">0x12</span><span class="p">,</span>
+            <span class="c1"># timing and driving scheme</span>
+            <span class="n">SET_DISP_CLK_DIV</span><span class="p">,</span>
+            <span class="mh">0x80</span><span class="p">,</span>
+            <span class="n">SET_PRECHARGE</span><span class="p">,</span>
+            <span class="mh">0x22</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">external_vcc</span> <span class="k">else</span> <span class="mh">0xF1</span><span class="p">,</span>
+            <span class="n">SET_VCOM_DESEL</span><span class="p">,</span>
+            <span class="mh">0x30</span><span class="p">,</span>  <span class="c1"># 0.83*Vcc  # n.b. specs for ssd1306 64x32 oled screens imply this should be 0x40</span>
+            <span class="c1"># display</span>
+            <span class="n">SET_CONTRAST</span><span class="p">,</span>
+            <span class="mh">0xFF</span><span class="p">,</span>  <span class="c1"># maximum</span>
+            <span class="n">SET_ENTIRE_ON</span><span class="p">,</span>  <span class="c1"># output follows RAM contents</span>
+            <span class="n">SET_NORM_INV</span><span class="p">,</span>  <span class="c1"># not inverted</span>
+            <span class="n">SET_IREF_SELECT</span><span class="p">,</span>
+            <span class="mh">0x30</span><span class="p">,</span>  <span class="c1"># enable internal IREF during display on</span>
+            <span class="c1"># charge pump</span>
+            <span class="n">SET_CHARGE_PUMP</span><span class="p">,</span>
+            <span class="mh">0x10</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">external_vcc</span> <span class="k">else</span> <span class="mh">0x14</span><span class="p">,</span>
+            <span class="n">SET_DISP</span> <span class="o">|</span> <span class="mh">0x01</span><span class="p">,</span>  <span class="c1"># display on</span>
+        <span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">poweroff</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Turn off the display (nothing visible)&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="n">SET_DISP</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_power</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">contrast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contrast</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjust the contrast&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="n">SET_CONTRAST</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">invert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">invert</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Invert all pixels on the display&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="n">SET_NORM_INV</span> <span class="o">|</span> <span class="p">(</span><span class="n">invert</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rotate</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rotate the display 0 or 180 degrees&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="n">SET_COM_OUT_DIR</span> <span class="o">|</span> <span class="p">((</span><span class="n">rotate</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="n">SET_SEG_REMAP</span> <span class="o">|</span> <span class="p">(</span><span class="n">rotate</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="c1"># com output (vertical mirror) is changed immediately</span>
+        <span class="c1"># you need to call show() for the seg remap to be visible</span>
+
+    <span class="k">def</span> <span class="nf">write_framebuf</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Derived class must implement this&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">write_cmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Derived class must implement this&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">poweron</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="s2">&quot;Reset device and turn on the display.&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reset_pin</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset_pin</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset_pin</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.010</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset_pin</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.010</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="n">SET_DISP</span> <span class="o">|</span> <span class="mh">0x01</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_power</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the display&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_addressing</span><span class="p">:</span>
+            <span class="n">xpos0</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">xpos1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">!=</span> <span class="mi">128</span><span class="p">:</span>
+                <span class="c1"># narrow displays use centered columns</span>
+                <span class="n">col_offset</span> <span class="o">=</span> <span class="p">(</span><span class="mi">128</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+                <span class="n">xpos0</span> <span class="o">+=</span> <span class="n">col_offset</span>
+                <span class="n">xpos1</span> <span class="o">+=</span> <span class="n">col_offset</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="n">SET_COL_ADDR</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="n">xpos0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="n">xpos1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="n">SET_PAGE_ADDR</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pages</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_framebuf</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">SSD1306_I2C</span><span class="p">(</span><span class="n">_SSD1306</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    I2C class for SSD1306</span>
+
+<span class="sd">    :param width: the width of the physical screen in pixels,</span>
+<span class="sd">    :param height: the height of the physical screen in pixels,</span>
+<span class="sd">    :param i2c: the I2C peripheral to use,</span>
+<span class="sd">    :param addr: the 8-bit bus address of the device,</span>
+<span class="sd">    :param external_vcc: whether external high-voltage source is connected.</span>
+<span class="sd">    :param reset: if needed, DigitalInOut designating reset pin</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">i2c</span><span class="p">:</span> <span class="n">busio</span><span class="o">.</span><span class="n">I2C</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">addr</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mh">0x3C</span><span class="p">,</span>
+        <span class="n">external_vcc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">reset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">digitalio</span><span class="o">.</span><span class="n">DigitalInOut</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_addressing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">i2c_device</span> <span class="o">=</span> <span class="n">i2c_device</span><span class="o">.</span><span class="n">I2CDevice</span><span class="p">(</span><span class="n">i2c</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addr</span> <span class="o">=</span> <span class="n">addr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_addressing</span> <span class="o">=</span> <span class="n">page_addressing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># Add an extra byte to the data buffer to hold an I2C data/command byte</span>
+        <span class="c1"># to use hardware-compatible I2C transactions.  A memoryview of the</span>
+        <span class="c1"># buffer is used to mask this byte from the framebuffer operations</span>
+        <span class="c1"># (without a major memory hit as memoryview doesn&#39;t copy to a separate</span>
+        <span class="c1"># buffer).</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(((</span><span class="n">height</span> <span class="o">//</span> <span class="mi">8</span><span class="p">)</span> <span class="o">*</span> <span class="n">width</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x40</span>  <span class="c1"># Set first byte of data buffer to Co=0, D/C=1</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="nb">memoryview</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">)[</span><span class="mi">1</span><span class="p">:],</span>
+            <span class="n">width</span><span class="p">,</span>
+            <span class="n">height</span><span class="p">,</span>
+            <span class="n">external_vcc</span><span class="o">=</span><span class="n">external_vcc</span><span class="p">,</span>
+            <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">,</span>
+            <span class="n">page_addressing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">page_addressing</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">write_cmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Send a command to the I2C device&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x80</span>  <span class="c1"># Co=1, D/C#=0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmd</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">i2c_device</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">i2c_device</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">write_framebuf</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Blast out the frame buffer using a single I2C transaction to support</span>
+<span class="sd">        hardware I2C interfaces.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_addressing</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pages</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="mh">0xB0</span> <span class="o">+</span> <span class="n">page</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page_column_start</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write_cmd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page_column_start</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pagebuffer</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span>
+                    <span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">page</span> <span class="p">:</span> <span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="p">(</span><span class="n">page</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="p">]</span>
+                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">i2c_device</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">i2c_device</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pagebuffer</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">i2c_device</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">i2c_device</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">)</span>
+
+
+<span class="c1"># pylint: disable-msg=too-many-arguments</span>
+<span class="k">class</span> <span class="nc">SSD1306_SPI</span><span class="p">(</span><span class="n">_SSD1306</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SPI class for SSD1306</span>
+
+<span class="sd">    :param width: the width of the physical screen in pixels,</span>
+<span class="sd">    :param height: the height of the physical screen in pixels,</span>
+<span class="sd">    :param spi: the SPI peripheral to use,</span>
+<span class="sd">    :param dc: the data/command pin to use (often labeled &quot;D/C&quot;),</span>
+<span class="sd">    :param reset: the reset pin to use,</span>
+<span class="sd">    :param cs: the chip-select pin to use (sometimes labeled &quot;SS&quot;).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># pylint: disable=no-member</span>
+    <span class="c1"># Disable should be reconsidered when refactor can be tested.</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">spi</span><span class="p">:</span> <span class="n">busio</span><span class="o">.</span><span class="n">SPI</span><span class="p">,</span>
+        <span class="n">dc</span><span class="p">:</span> <span class="n">digitalio</span><span class="o">.</span><span class="n">DigitalInOut</span><span class="p">,</span>
+        <span class="n">reset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">digitalio</span><span class="o">.</span><span class="n">DigitalInOut</span><span class="p">],</span>
+        <span class="n">cs</span><span class="p">:</span> <span class="n">digitalio</span><span class="o">.</span><span class="n">DigitalInOut</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">external_vcc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">baudrate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8000000</span><span class="p">,</span>
+        <span class="n">polarity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">phase</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">page_addressing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_addressing</span> <span class="o">=</span> <span class="n">page_addressing</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_addressing</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                <span class="s2">&quot;Page addressing mode with SPI has not yet been implemented.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rate</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
+        <span class="n">dc</span><span class="o">.</span><span class="n">switch_to_output</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spi_device</span> <span class="o">=</span> <span class="n">spi_device</span><span class="o">.</span><span class="n">SPIDevice</span><span class="p">(</span>
+            <span class="n">spi</span><span class="p">,</span> <span class="n">cs</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="n">baudrate</span><span class="p">,</span> <span class="n">polarity</span><span class="o">=</span><span class="n">polarity</span><span class="p">,</span> <span class="n">phase</span><span class="o">=</span><span class="n">phase</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dc_pin</span> <span class="o">=</span> <span class="n">dc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">((</span><span class="n">height</span> <span class="o">//</span> <span class="mi">8</span><span class="p">)</span> <span class="o">*</span> <span class="n">width</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="nb">memoryview</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">),</span>
+            <span class="n">width</span><span class="p">,</span>
+            <span class="n">height</span><span class="p">,</span>
+            <span class="n">external_vcc</span><span class="o">=</span><span class="n">external_vcc</span><span class="p">,</span>
+            <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">,</span>
+            <span class="n">page_addressing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">page_addressing</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">write_cmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Send a command to the SPI device&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dc_pin</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">spi_device</span> <span class="k">as</span> <span class="n">spi</span><span class="p">:</span>
+            <span class="n">spi</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">([</span><span class="n">cmd</span><span class="p">]))</span>
+
+    <span class="k">def</span> <span class="nf">write_framebuf</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;write to the frame buffer via SPI&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dc_pin</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">spi_device</span> <span class="k">as</span> <span class="n">spi</span><span class="p">:</span>
+            <span class="n">spi</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Door The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
